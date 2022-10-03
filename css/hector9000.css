@@ -355,15 +355,27 @@ body {
 
 #title {
     margin: auto;
+    position: fixed;
+    left: 18px;
     font-family: hector;
 }
 
+#logo{
+    position: fixed; 
+    left: 680px;
+}
+
+#cocteles{
+    position: fixed; 
+    top: 50px;
+    right: 185px; 
+}
 #config-but {
     width: 40px;
     height: 40px;
     position: fixed;
-    top: calc(7.5% - 8px);
-    right: calc(7.5% - 20px);
+    top: 50px;
+    right: 20px;
 }
 
 .side {
@@ -397,8 +409,8 @@ body {
 }
 
 #h9 {
-    font-size: 6rem;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: thin;
 }
 
 .d0 {
