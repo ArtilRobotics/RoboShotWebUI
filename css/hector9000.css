@@ -57,9 +57,9 @@
     top: 55%;
     left: 50%;
     z-index: 100;
-    background-color: #100031;
-    border: 10px solid rgb(255, 255, 255);
-    border-radius: 20px;
+    background-color: #000000;
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 10px;
     transition: width 1s, height 1s, top 1s, left 1s;
 }
 
@@ -121,7 +121,7 @@
 }
 
 #DM_abbruch {
-    background-color: rgb(226, 47, 2);
+    background-color: rgb(0, 0, 0);
     position: relative;
     right: 15px;
 }
@@ -148,9 +148,10 @@
 
 .DM_button {
     padding: 3%;
-    background-color: green;
-    border: 3px solid rgba(100, 100, 100, 0.5);
+    background-color: rgb(0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
     margin: auto;
+    width:auto;
     display: flex;
     flex-direction: row;
     font-size: 4vh;
@@ -296,16 +297,21 @@ body {
 }
 
 .button {
-    background-color: green;
+    background-color: rgb(0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
     width: 28%;
     margin-right: auto;
     margin-left: auto;
     height: 90%;
     display: flex;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .alc {
-    background-color: red !important;
+    background-color: rgb(0, 0, 0) !important;
 }
 
 .loader_active {
@@ -317,7 +323,7 @@ body {
     margin: auto;
     text-align: center;
     width: 100%;
-    color: #000;
+    color: rgb(255, 255, 255);
     font-size: 3rem;
     margin-top: auto;
     margin-bottom: auto;
@@ -365,10 +371,15 @@ body {
     left: 680px;
 }
 
+#logo2{
+    position: fixed;
+    left: 350px;
+    bottom: 25px; 
+}
 #cocteles{
     position: fixed; 
     top: 50px;
-    right: 185px; 
+    right: 320px; 
 }
 #config-but {
     width: 40px;
@@ -413,6 +424,10 @@ body {
     font-weight: thin;
 }
 
+#h10 {
+    font-size: 2rem;
+    font-weight: thin;
+}
 .d0 {
     right: 10%;
 }
@@ -424,30 +439,29 @@ body {
 
 .CM_button {
     margin: auto;
-    min-width: 40px;
+    min-width: 20px;
     min-height: 40px;
-    background-color: #2e72aa;
-    color: black;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
     font-weight: bold;
     display: flex;
     text-align: center;
-    width: 450px;
-    /*max-width: 450px;*/
-    border: 1px solid black;
+    width: auto;
+    border: 2px solid rgb(255, 255, 255);
     border-radius: 5px;
 }
 
 .CM_button > div{
     margin: auto;
-    font-size: 3rem;
+    font-size: 2rem;
+    text-align: center;
 }
 
 #CM_buttons {
-    /*width: 70%;*/
-    height: 25%;
+    text-align: center;
+    height: 30%;
     display: flex;
     flex-direction: row;
-
 }
 
 #CM_buttons2 {

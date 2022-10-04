@@ -94,12 +94,12 @@
                     </div>
                 </div>
                 <div class="DM_button" id="DM_abbruch" onclick="closeDrinkModal()"><i
-                        class="far fa-times-circle"></i><span style="padding-right: 10px;">Abbruch</span></div>
+                        class="far fa-times-circle"></i><span style="padding-right: 10px;">Volver</span></div>
                 <div class="DM_button" id="DM_zubereiten" onclick="">
                     <div id="DM_zubereiten_inner">
                         <i class="fas fa-cocktail" style="margin-top: auto; margin-bottom: auto;"></i>
                         <span
-                                style="margin-top: auto; margin-bottom: auto; padding-right: 10px; padding-left: 10px;">Zubereiten</span>
+                                style="margin-top: auto; margin-bottom: auto; padding-right: 10px; padding-left: 10px;">Preparar coctel</span>
                     </div>
                     <div class="inv" id="DM_zubereiten_loading">
                         <div class="lds-roller">
@@ -118,30 +118,22 @@
         </div>
         <div class="inv" id="mod-config">
             <div id="CM_content">
-                <h1>Configuration</h1>
+                <span id="h9">CONFIGURACION</span>
                 <div id="CM_buttons">
-                    <div class="CM_button" onclick="publish(TopicDry, 'true')">
-                        <div>DRY</div>
+                    <div class="CM_button" onclick="location.reload()">
+                        <span id="h9">RECARGAR</span>
                     </div>
                     <div class="CM_button" onclick="publish(TopicClean, 'true')">
-                        <div>CLEAN</div>
+                        <span id="h9">LIMPIAR</span>
                     </div>
                 </div>
                 <div id="CM_buttons2">
-                    <div class="CM_button" onclick="publish(TopicCloseAllValves, 'true')">
-                        <div>Close all valves</div>
-                    </div>
-                    <div class="CM_button" onclick="publish(TopicOpenAllValves, 'true')">
-                        <div>Open all valves</div>
+                    <div class="CM_button" onclick="closeConfigModal()">
+                        <span id="h9">SALIR</span>
                     </div>
                 </div>
-                <div id="CM_buttons3">
-                    <div class="CM_button" onclick="location.reload()">
-                        <div>RELOAD</div>
-                    </div>
-                    <div class="CM_button" onclick="closeConfigModal()">
-                        <div>Close</div>
-                    </div>
+                <div id="logo2">
+                    <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="100" height="">
                 </div>
             </div>
         </div>
