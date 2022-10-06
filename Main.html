@@ -37,7 +37,7 @@
 <div id="content">
     <div id="header">
         <div id="title">
-            <span id="h9">ROBOSHOT</span>
+            <span id="h10">ROBOSHOT</span>
         </div>
         <div id="logo">
             <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="100" height="">
@@ -99,12 +99,12 @@
                     </div>
                 </div>
                 <div class="DM_button" id="DM_abbruch" onclick="closeDrinkModal()"><i
-                        class="far fa-times-circle"></i><span style="padding-right: 10px;">Volver</span></div>
+                        class="far fa-times-circle"></i><span style="padding-right: 10px;"><span id="h11">Volver</a></span></div>
                 <div class="DM_button" id="DM_zubereiten" onclick="">
                     <div id="DM_zubereiten_inner">
                         <i class="fas fa-cocktail" style="margin-top: auto; margin-bottom: auto;"></i>
                         <span
-                                style="margin-top: auto; margin-bottom: auto; padding-right: 10px; padding-left: 10px;">Preparar coctel</span>
+                                style="margin-top: auto; margin-bottom: auto; padding-right: 10px; padding-left: 10px;"><span id="h11">Preparar coctel</a></span>
                     </div>
                     <div class="inv" id="DM_zubereiten_loading">
                         <div class="lds-roller">
@@ -123,16 +123,20 @@
         </div>
         <div class="inv" id="mod-config">
             <div id="CM_content">
-                <span id="h9">CONFIGURACION</span>
+                <div id="CM_config">
+                    <span id="h9"><u>CONFIGURACION</u></a></span>
+                </div>
                 <div id="CM_buttons">
                     <div class="CM_button" onclick="location.reload()">
                         <span id="h9">RECARGAR</span>
                     </div>
+                </div>
+                <div id="CM_buttons2">
                     <div class="CM_button" onclick="publish(TopicClean, 'true')">
                         <span id="h9">LIMPIAR</span>
                     </div>
                 </div>
-                <div id="CM_buttons2">
+                <div id="CM_buttons3">
                     <div class="CM_button" onclick="closeConfigModal()">
                         <span id="h9">SALIR</span>
                     </div>
