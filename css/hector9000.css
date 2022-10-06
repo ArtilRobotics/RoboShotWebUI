@@ -32,7 +32,7 @@
     transition: opacity 500ms;
 }
 .fas-s {
-    font-size: 35vh !important;
+    font-size: 15vh !important;
 }
 
 .open {
@@ -49,6 +49,7 @@
     opacity: 1 !important;
 }
 
+/*Ventana de ingredientes de cocteles*/
 .modal {
     opacity: 0;
     width: 0;
@@ -120,6 +121,7 @@
     transition: opacity 500ms;
 }
 
+/*Boton de regresar*/
 #DM_abbruch {
     background-color: rgb(0, 0, 0);
     position: relative;
@@ -175,7 +177,7 @@
 }
 
 .DM_ing_name {
-    text-align: left;
+    text-align: center;
 }
 
 #DM_List {
@@ -204,7 +206,7 @@
     margin: auto;
 }
 #CM_content {
-    margin: 0 auto;!important;
+    margin: 0 auto;
     height: 90%;
     width: 90%;
     text-align: center;
@@ -237,9 +239,9 @@
     width: 100vw;
     z-index: 99;
 }
-
+/*Fuente de letra*/
 @font-face {
-    font-family: "hector";
+    font-family: "Artil";
     src: url("../font/Data70.ttf");
 }
 
@@ -259,13 +261,13 @@
     height: 100%;
 }
 
-
+/*Fondo de donde se ponen los botones*/
 body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     color: #FFFFFF;
 }
 
@@ -273,8 +275,9 @@ body {
     font-size: 5rem;
 }
 
+/*Margen del botón para derecha o izquierda*/
 .side-but {
-    background-color: grey;
+    background-color: rgb(164, 164, 164);
     padding-right: 5px;
     padding-left: 5px;
     border-radius: 5px
@@ -296,9 +299,10 @@ body {
 
 }
 
+/*Botones en los que se carga las bebidas*/
 .button {
     background-color: rgb(0, 0, 0);
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px groove rgb(255, 255, 255);
     width: 28%;
     margin-right: auto;
     margin-left: auto;
@@ -319,18 +323,18 @@ body {
     padding-bottom: 2px !important;
 }
 
+/* Nombres de las bebidas en el menu principal*/
 .name {
     margin: auto;
     text-align: center;
     width: 100%;
     color: rgb(255, 255, 255);
-    font-size: 3rem;
-    margin-top: auto;
-    margin-bottom: auto;
+    font-size: 1rem;
+    margin-bottom: 0px;
     position: relative;
-    top: -3%;
 }
 
+/* Ubicación de los botones*/
 .buttons {
     width: 80%;
     height: 90%;
@@ -351,6 +355,7 @@ body {
     margin-bottom: 3%;
 }
 
+/*Ubicacion del encabezado*/
 #header {
     width: 100%;
     height: 15%;
@@ -359,6 +364,7 @@ body {
     padding-top: 0;
 }
 
+/*Para el titulo de roboshot*/
 #title {
     margin: auto;
     position: fixed;
@@ -366,29 +372,36 @@ body {
     font-family: hector;
 }
 
+/*Posicion del logo en la pantalla principal*/
 #logo{
     position: fixed; 
-    left: 680px;
+    left: 620px;
 }
 
+/*Posicion del logo en la pantalla de configuracion*/
 #logo2{
     position: fixed;
     left: 350px;
     bottom: 25px; 
 }
+
+/*Ubicación de la palabra cocteles en la mitad*/
 #cocteles{
     position: fixed; 
-    top: 50px;
+    top: 35px;
     right: 320px; 
 }
+
+/*Posicion,ancho y alto del boton de configuracion*/
 #config-but {
     width: 40px;
     height: 40px;
     position: fixed;
-    top: 50px;
+    top: 10px;
     right: 20px;
 }
 
+/*Color de los costados de la pagina principal*/
 .side {
     width: 10%;
     height: 85%;
@@ -396,7 +409,7 @@ body {
     top: 15%;
     display: flex;
     z-index: 90;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
 }
 
 #right-side {
@@ -415,15 +428,18 @@ body {
     left: 0;
 }
 
+/*Proporcion del boton de configuracion*/
 .fa-cog {
     font-size: 40px;
 }
 
+/*Tamaño y ancho de las letras*/
 #h9 {
     font-size: 2rem;
     font-weight: thin;
 }
 
+/*Tamaño y ancho de las letras*/
 #h10 {
     font-size: 2rem;
     font-weight: thin;
@@ -436,18 +452,18 @@ body {
     right: -110%;
 }
 
-
+/*Botones dentro de la opcion de configuracion*/
 .CM_button {
     margin: auto;
     min-width: 20px;
     min-height: 40px;
-    background-color: #000000;
+    background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
     font-weight: bold;
     display: flex;
     text-align: center;
     width: auto;
-    border: 2px solid rgb(255, 255, 255);
+    border: 3px groove rgb(255, 255, 255);
     border-radius: 5px;
 }
 
@@ -457,13 +473,15 @@ body {
     text-align: center;
 }
 
+/*Espaciado entre la primera fila de botones*/
 #CM_buttons {
-    text-align: center;
-    height: 30%;
+    text-align: auto;
+    height: 25%;
     display: flex;
     flex-direction: row;
 }
 
+/*Espaciado entre la segunda fila de botones*/
 #CM_buttons2 {
     /*width: 70%;*/
     height: 30%;
@@ -472,6 +490,7 @@ body {
 
 }
 
+/*Espaciado entre la tercera fila de botones*/
 #CM_buttons3 {
     /*width: 70%;*/
     height: 25%;
@@ -494,14 +513,15 @@ body {
     transform-origin: 32px 32px;
 }
 
+/*Puntos de cargando*/
 .lds-roller div:after {
-    content: " ";
+    content: "";
     display: block;
     position: absolute;
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #fff;
+    background: rgb(255, 255, 255);
     margin: -3px 0 0 -3px;
 }
 
@@ -586,6 +606,7 @@ body {
     }
 }
 
+/*Pagina de cargando*/
 #loading {
     position: fixed;
     top: 0;
@@ -595,7 +616,7 @@ body {
     z-index: 1000;
     display: flex;
     flex-direction: row;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
 }
 
 #loading > div {

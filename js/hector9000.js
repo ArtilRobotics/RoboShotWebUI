@@ -51,7 +51,7 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     ']' +
     '}';
     
-var jsont = '{"drinks": [{"name": "Tequilla Sunrise","id": 123, "alcohol": true},{"name": "bla2","id": 123, "alcohol": false},{"name": "bla3","id": 123, "alcohol": false},{"name": "bla4","id": 123, "alcohol": false},{"name": "bla5","id": 123, "alcohol": true},{"name": "bla6","id": 123, "alcohol": true},{"name": "bla7","id": 123, "alcohol": false}]}';
+var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true},{"name": "Margartia frozen de fresa","id": 123, "alcohol": false},{"name": "Margarita frozen de limón","id": 123, "alcohol": false},{"name": "Pisco Sunrise","id": 123, "alcohol": false},{"name": "Cosmopolitan","id": 123, "alcohol": true},{"name": "Mojito","id": 123, "alcohol": true}]}';
 
 //--------- Testing end ---------------
 
