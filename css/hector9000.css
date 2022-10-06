@@ -240,7 +240,7 @@
     z-index: 99;
 }
 /*Fuente de letra*/
-@font-face {
+@font-face{
     font-family: "Artil";
     src: url("../font/Data70.ttf");
 }
@@ -369,7 +369,7 @@ body {
     margin: auto;
     position: fixed;
     left: 18px;
-    font-family: hector;
+    font-family:"Artil";
 }
 
 /*Posicion del logo en la pantalla principal*/
