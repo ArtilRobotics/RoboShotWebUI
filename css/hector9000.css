@@ -242,9 +242,17 @@
 /*Fuente de letra*/
 @font-face{
     font-family: "Artil";
-    src: url("../font/Data70.ttf");
+    src: url("../webfonts/OpenSans-Bold.ttf");
 }
 
+@font-face{
+    font-family: "Artil_Cocteles";
+    src: url("../webfonts/OpenSans-SemiBold.ttf");
+}
+@font-face{
+    font-family: "Artil_Preparar";
+    src: url("../webfonts/OpenSans-LightItalic.ttf");
+}
 .inv {
     visibility: collapse !important;
     display: none !important;
@@ -369,7 +377,6 @@ body {
     margin: auto;
     position: fixed;
     left: 18px;
-    font-family:"Artil";
 }
 
 /*Posicion del logo en la pantalla principal*/
@@ -388,8 +395,9 @@ body {
 /*Ubicación de la palabra cocteles en la mitad*/
 #cocteles{
     position: fixed; 
-    top: 35px;
+    top: 30px;
     right: 320px; 
+    font-family:"Artil";
 }
 
 /*Posicion,ancho y alto del boton de configuracion*/
@@ -433,15 +441,28 @@ body {
     font-size: 40px;
 }
 
-/*Tamaño y ancho de las letras*/
+/*Tamaño y ancho de las letras de cocteles*/
 #h9 {
     font-size: 2rem;
+    font-family: "Artil_Cocteles";
     font-weight: thin;
 }
 
-/*Tamaño y ancho de las letras*/
+/*Tamaño y ancho de las letras del titulo*/
 #h10 {
     font-size: 2rem;
+    font-family: "Artil";
+    font-weight: thin;
+}
+/*Tamaño y ancho de las letras de volver y preparar bebida*/
+#h11{
+    font-size: 1rem;
+    font-family: "Artil_Preparar";
+    font-weight: thin;
+}
+#hconf{
+    font-size: 2rem;
+    font-family: "Artil_Cocteles";
     font-weight: thin;
 }
 .d0 {
@@ -476,15 +497,19 @@ body {
 /*Espaciado entre la primera fila de botones*/
 #CM_buttons {
     text-align: auto;
-    height: 25%;
+    height: 20%;
     display: flex;
     flex-direction: row;
+}
+
+#CM_config {
+    text-align: center;
 }
 
 /*Espaciado entre la segunda fila de botones*/
 #CM_buttons2 {
     /*width: 70%;*/
-    height: 30%;
+    height: 20%;
     display: flex;
     flex-direction: row;
 
@@ -493,7 +518,7 @@ body {
 /*Espaciado entre la tercera fila de botones*/
 #CM_buttons3 {
     /*width: 70%;*/
-    height: 25%;
+    height: 20%;
     display: flex;
     flex-direction: row;
 
