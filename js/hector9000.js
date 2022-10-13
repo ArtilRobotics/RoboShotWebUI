@@ -56,12 +56,12 @@ var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true},{"n
 //--------- Testing end ---------------
 
 function generateButton(name, id, alc) {
-    shtml = '<div onclick="openDrinkModal(this)" class="button ';
+    html = '<div onclick="openDrinkModal(this)" class="button" ';
     if (alc) {
-        shtml += 'alc';
+        html += 'src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"';
     }
-    shtml += '" d_id="' + id + '" d_name="' + name + '"><div class="name">' + name + "</div></div>";
-    return shtml;
+    html += '" d_id="' + id + '" d_name="' + name + '"><div class="name">' + name + "</div></div>";
+    return html;
 }
 
 function generateButtons(drinksjson) {
@@ -76,11 +76,11 @@ started = true;
         html = '<div class="buttons" id="id' + (i + 1) + '">';
         html += '<div class="row r1">';
         for (j = 0; j < 3; j++) {
-            html += generateButton(json.drinks[(6 * i + j)].name, json.drinks[(6 * i + j)].id, json.drinks[(6 * i + j)].alcohol);
+            html += generateButton(json.drinks[(6 * i + j)].name, json.drinks[(6 * i + j)].id);
         }
         html += '</div><div class="row r2">';
         for (j = 0; j < 3; j++) {
-            html += generateButton(json.drinks[(6 * i + 3 + j)].name, json.drinks[(6 * i + 3 + j)].id, json.drinks[(6 * i + 3 + j)].alcohol);
+            html += generateButton(json.drinks[(6 * i + 3 + j)].name, json.drinks[(6 * i + 3 + j)].id);
         }
         html += '</div></div>';
         cont.innerHTML += html;
@@ -93,13 +93,13 @@ started = true;
         html = '<div class="buttons" id="id' + (count + 1) + '"><div class="row r1">';
         if (rest >= 4) {
             for (i = 0; i < 3; i++) {
-                html += generateButton(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id, json.drinks[(ammont + i)].alcohol);
+                html += generateButton(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id);
             }
             html += '</div><div class="row r2">';
             ct = 3;
         }
         do {
-            html += generateButton(json.drinks[(ammont + ct)].name, json.drinks[(ammont + ct)].id, json.drinks[(ammont + ct)].alcohol);
+            html += generateButton(json.drinks[(ammont + ct)].name, json.drinks[(ammont + ct)].id);
             ct++;
         } while (ct < rest);
         html += '</div></div>';
@@ -183,7 +183,7 @@ function closeDrinkModal() {
         }, 1000)
     }
 }
-
+//Para ver el nombre al momento de abrir para servirse
 function openDrinkModal(drinkinfo) {
     if (MM_status === MM_State.CLOSED) {
         openModal();
@@ -191,11 +191,13 @@ function openDrinkModal(drinkinfo) {
         setTimeout(function () {
             document.getElementById("mod-drink").className = "";
         }, 700);
-        let d_name = "<u>" + drinkinfo.getAttribute("d_name");
-        if (drinkinfo.className.includes("alc")) {
-            d_name += "  (alc) ";
-        }
-        d_name += "</u>";
+        let d_name = drinkinfo.getAttribute("d_name");
+        // "<u>" + drinkinfo.getAttribute("d_name"); Si quiero que el nombre me salga subrayado
+        //Si es que la info contiene alc sale alc alado del nombre
+        //if (drinkinfo.className.includes("alc")) {
+        //    d_name += "  (alc) ";
+        //}
+        //d_name += "</u>";
         document.getElementById("DM_name").innerHTML = d_name;
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
         if (testing) {
