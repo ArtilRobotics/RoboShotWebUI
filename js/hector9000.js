@@ -38,7 +38,7 @@ const TopicCloseAllValves = "Hector9000/closeAllValves";
 
 //--------- Testing start ---------------
 
-const testing = true;
+const testing = false;
 
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
@@ -51,16 +51,17 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     ']' +
     '}';
     
-var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false},{"name": "Margarita frozen de limón","id": 123, "alcohol": false},{"name": "Pisco Sunrise","id": 123, "alcohol": false},{"name": "Cosmopolitan","id": 123, "alcohol": true},{"name": "Mojito","id": 123, "alcohol": true}]}';
+var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false},{"name": "Margarita frozen de limón","id": 123, "alcohol": false},{"name": "Pisco Sunrise","id": 123, "alcohol": false},{"name": "Cosmopolitan","id": 123, "alcohol": true},{"name": "Mojito","id": 123, "alcohol": true}]}';
 
 //--------- Testing end ---------------
 
-function generateButton(name, id, alc) {
+function generateButton(name, id,image) {
     html = '<div onclick="openDrinkModal(this)" class="button" ';
-    if (alc) {
-        html += 'src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"';
-    }
-    html += '" d_id="' + id + '" d_name="' + name + '"><div class="name">' + name + "</div></div>";
+    // if (alc) {
+    //     html += 'src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"';
+    // }
+    html += '" d_id="' + id + '" d_name="' + name + '">';
+    html += '<div><img src="'+image+'" alt="'+name+'" width="100" height="115"></div><br><div class="name">' + name + '</div></div>"';
     return html;
 }
 
@@ -76,11 +77,11 @@ started = true;
         html = '<div class="buttons" id="id' + (i + 1) + '">';
         html += '<div class="row r1">';
         for (j = 0; j < 3; j++) {
-            html += generateButton(json.drinks[(6 * i + j)].name, json.drinks[(6 * i + j)].id);
+            html += generateButton(json.drinks[(6 * i + j)].name, json.drinks[(6 * i + j)].id,json.drinks[(6 * i + j)].image);
         }
         html += '</div><div class="row r2">';
         for (j = 0; j < 3; j++) {
-            html += generateButton(json.drinks[(6 * i + 3 + j)].name, json.drinks[(6 * i + 3 + j)].id);
+            html += generateButton(json.drinks[(6 * i + 3 + j)].name, json.drinks[(6 * i + 3 + j)].id,json.drinks[(6 * i + 3 + j)].image);
         }
         html += '</div></div>';
         cont.innerHTML += html;
@@ -93,13 +94,13 @@ started = true;
         html = '<div class="buttons" id="id' + (count + 1) + '"><div class="row r1">';
         if (rest >= 4) {
             for (i = 0; i < 3; i++) {
-                html += generateButton(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id);
+                html += generateButton(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id,json.drinks[(ammont + i)].image);
             }
             html += '</div><div class="row r2">';
             ct = 3;
         }
         do {
-            html += generateButton(json.drinks[(ammont + ct)].name, json.drinks[(ammont + ct)].id);
+            html += generateButton(json.drinks[(ammont + ct)].name, json.drinks[(ammont + ct)].id,json.drinks[(ammont + ct)].image);
             ct++;
         } while (ct < rest);
         html += '</div></div>';
