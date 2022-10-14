@@ -43,7 +43,7 @@ const testing = false;
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
     '"ingredients": [' +
-    '{"name": "Cola", "ammount": 150},' +
+    '{"name": "Cola", "ammount": 150, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},' +
     '{"name": "Club-Mate", "ammount": 100},' +
     '{"name": "Rum", "ammount": 50},' +
     '{"name": "Wasser", "ammount": 200},' +
@@ -51,7 +51,7 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     ']' +
     '}';
     
-var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false},{"name": "Margarita frozen de limón","id": 123, "alcohol": false},{"name": "Pisco Sunrise","id": 123, "alcohol": false},{"name": "Cosmopolitan","id": 123, "alcohol": true},{"name": "Mojito","id": 123, "alcohol": true}]}';
+var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
 
 //--------- Testing end ---------------
 
@@ -60,8 +60,8 @@ function generateButton(name, id,image) {
     // if (alc) {
     //     html += 'src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"';
     // }
-    html += '" d_id="' + id + '" d_name="' + name + '">';
-    html += '<div><img src="'+image+'" alt="'+name+'" width="100" height="115"></div><br><div class="name">' + name + '</div></div>"';
+    html += '" d_id="' + id + '" d_name="' + name + '"d_image="'+ image + '">';
+    html += '<div class="image"><img src="'+image+'" alt="'+name+'" width="85" height="100"></div><br><div class="name">' + name + '</div></div>"';
     return html;
 }
 
@@ -193,13 +193,15 @@ function openDrinkModal(drinkinfo) {
             document.getElementById("mod-drink").className = "";
         }, 700);
         let d_name = drinkinfo.getAttribute("d_name");
+        let d_image=drinkinfo.getAttribute("d_image");
         // "<u>" + drinkinfo.getAttribute("d_name"); Si quiero que el nombre me salga subrayado
         //Si es que la info contiene alc sale alc alado del nombre
         //if (drinkinfo.className.includes("alc")) {
         //    d_name += "  (alc) ";
         //}
         //d_name += "</u>";
-        document.getElementById("DM_name").innerHTML = d_name;
+        document.getElementById("DM_name").innerHTML = '<div>'+ d_name + '</div>';
+        document.getElementById("DM_name").innerHTML += '<div class="image"><img src="'+d_image+'" alt="'+d_name+'" width="85" height="100"></div>';
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
         if (testing) {
             DM_status = DM_State.LOADING;
@@ -211,6 +213,7 @@ function openDrinkModal(drinkinfo) {
     }
 }
 
+//Indica los ingredientes 
 function showIngredientsAndButton(json) {
     let drinkinfo = JSON.parse(json);
 console.log(drinkinfo);

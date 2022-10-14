@@ -334,13 +334,21 @@ body {
 
 /* Nombres de las bebidas en el menu principal*/
 .name {
-    margin: auto;
+    position:absolute;
+    margin:auto;
+    width:auto;
+    /*position:fixed;*/
     text-align: center;
-    width: 100%;
     color: rgb(255, 255, 255);
-    font-size: 1rem;
-    margin-bottom: 0px;
-    position: relative;
+    font-family:"Artil";
+    font-size: 0.75rem;
+}
+
+/* Imagen en el menu principal*/
+.image {
+    margin: auto;
+    margin-top: 5px;
+    margin-left:45px;
 }
 
 /* Ubicación de los botones*/
