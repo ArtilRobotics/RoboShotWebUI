@@ -51,7 +51,7 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     ']' +
     '}';
     
-var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
+var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"../Hector9000WebUI/Images/margarita-frozen.png"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
 
 //--------- Testing end ---------------
 
@@ -61,7 +61,7 @@ function generateButton(name, id,image) {
     //     html += 'src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"';
     // }
     html += '" d_id="' + id + '" d_name="' + name + '"d_image="'+ image + '">';
-    html += '<div class="image"><img src="'+image+'" alt="'+name+'" width="85" height="100"></div><br><div class="name">' + name + '</div></div>"';
+    html += '<div class="image"><img src="'+image+'" alt="'+name+'" width="85" height="100"></div><br><div class="name">' + name + '</div></div>';
     return html;
 }
 
@@ -166,6 +166,7 @@ function closeEitherModal() {
 // Drinkmodal
 function resetDM() {
     document.getElementById("DM_name").innerHTML = "";
+    document.getElementById("DM_image").innerHTML = "";
     document.getElementById("DM_List").innerHTML = "<div id=\"DM_ing_loader\"><div><div class=\"lds-roller\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>";
     document.getElementById("DM_zubereiten").onclick = function () {
     };
@@ -201,7 +202,7 @@ function openDrinkModal(drinkinfo) {
         //}
         //d_name += "</u>";
         document.getElementById("DM_name").innerHTML = '<div>'+ d_name + '</div>';
-        document.getElementById("DM_name").innerHTML += '<div class="image"><img src="'+d_image+'" alt="'+d_name+'" width="85" height="100"></div>';
+        document.getElementById("DM_image").innerHTML = '<div class="image"><img src="'+d_image+'" alt="'+d_name+'" width="85" height="100"></div>';
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
         if (testing) {
             DM_status = DM_State.LOADING;

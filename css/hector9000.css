@@ -114,6 +114,10 @@
     margin-left: 5%;
 }
 
+#DM_context {
+    height: 80%;
+}
+
 #DM_ing_loader {
     margin: auto;
     position: relative;
@@ -203,7 +207,6 @@
     display: flex;
     flex-direction: column;
     font-size: 4vh;
-    width: 80%;
     margin-left: 15%;
     height: 80%;
 }
@@ -211,7 +214,7 @@
 #DM_name {
     text-align: center;
     width: 100%;
-    font-size: 5vh;
+    font-size: 8vh;
     margin-bottom: 5%;
 }
 
@@ -321,6 +324,7 @@ body {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    justify-content: center;
 }
 
 .alc {
@@ -336,12 +340,12 @@ body {
 .name {
     position:absolute;
     margin:auto;
-    width:auto;
     /*position:fixed;*/
     text-align: center;
     color: rgb(255, 255, 255);
     font-family:"Artil";
     font-size: 0.75rem;
+    padding: 20% 1% 0 0;
 }
 
 /* Imagen en el menu principal*/
@@ -349,6 +353,8 @@ body {
     margin: auto;
     margin-top: 5px;
     margin-left:45px;
+    padding-top:10px;
+    
 }
 
 /* Ubicación de los botones*/
