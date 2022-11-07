@@ -71,22 +71,25 @@
         <div class="inv" id="mod-drink">
             <div id="DM_description">
                 <div id="DM_name"><u>Nombre de la bebida</u></div>
-                <div id="DM_List">
-                    <div id="DM_ing_loader">
-                        <div>
-                            <div class="lds-roller">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
+                <div id="DM_context">
+                    <div style="float:left" id="DM_image"></div>
+                    <div style="margin-left: 35%;" id="DM_List">
+                        <div id="DM_ing_loader">
+                            <div >
+                                <div class="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
             <div id="DM_buttons">
                 <div class="dis inv" id="DM_dose_bar">
@@ -98,8 +101,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="DM_button" id="DM_abbruch" onclick="closeDrinkModal()"><i
-                        class="far fa-times-circle"></i><span style="padding-right: 10px;"><span id="h11">Volver</a></span></div>
+                <div class="DM_button" id="DM_abbruch" onclick="closeDrinkModal()">
+                    <i class="fa-solid fa-rotate-left"style="margin-top: auto; margin-bottom: auto;"></i>
+                    <span 
+                        style="padding-right: 10px;"><span id="h11">Volver</a></span>
+                </div>
                 <div class="DM_button" id="DM_zubereiten" onclick="">
                     <div id="DM_zubereiten_inner">
                         <i class="fas fa-cocktail" style="margin-top: auto; margin-bottom: auto;"></i>

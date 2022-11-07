@@ -43,7 +43,7 @@ const testing = false;
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
     '"ingredients": [' +
-    '{"name": "Cola", "ammount": 150},' +
+    '{"name": "Cola", "ammount": 150, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},' +
     '{"name": "Club-Mate", "ammount": 100},' +
     '{"name": "Rum", "ammount": 50},' +
     '{"name": "Wasser", "ammount": 200},' +
@@ -51,13 +51,23 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     ']' +
     '}';
     
-var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false},{"name": "Margarita frozen de limón","id": 123, "alcohol": false},{"name": "Pisco Sunrise","id": 123, "alcohol": false},{"name": "Cosmopolitan","id": 123, "alcohol": true},{"name": "Mojito","id": 123, "alcohol": true}]}';
+var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"../Hector9000WebUI/Images/margarita-frozen.png"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
 
 //--------- Testing end ---------------
 
+<<<<<<< HEAD
 function generateButton(name, id) {
     html = '<div onclick="openDrinkModal(this)" class="button" ';
     html += '" d_id="' + id + '" d_name="' + name + '"><div class="name">' + name + "</div></div>";
+=======
+function generateButton(name, id,image) {
+    html = '<div onclick="openDrinkModal(this)" class="button" ';
+    // if (alc) {
+    //     html += 'src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"';
+    // }
+    html += '" d_id="' + id + '" d_name="' + name + '"d_image="'+ image + '">';
+    html += '<div class="image"><img src="'+image+'" alt="'+name+'" width="85" height="100"></div><br><div class="name">' + name + '</div></div>';
+>>>>>>> 336171a7c9667a6f55614707db728e204f42622f
     return html;
 }
 
@@ -73,11 +83,11 @@ started = true;
         html = '<div class="buttons" id="id' + (i + 1) + '">';
         html += '<div class="row r1">';
         for (j = 0; j < 3; j++) {
-            html += generateButton(json.drinks[(6 * i + j)].name, json.drinks[(6 * i + j)].id);
+            html += generateButton(json.drinks[(6 * i + j)].name, json.drinks[(6 * i + j)].id,json.drinks[(6 * i + j)].image);
         }
         html += '</div><div class="row r2">';
         for (j = 0; j < 3; j++) {
-            html += generateButton(json.drinks[(6 * i + 3 + j)].name, json.drinks[(6 * i + 3 + j)].id);
+            html += generateButton(json.drinks[(6 * i + 3 + j)].name, json.drinks[(6 * i + 3 + j)].id,json.drinks[(6 * i + 3 + j)].image);
         }
         html += '</div></div>';
         cont.innerHTML += html;
@@ -90,13 +100,13 @@ started = true;
         html = '<div class="buttons" id="id' + (count + 1) + '"><div class="row r1">';
         if (rest >= 4) {
             for (i = 0; i < 3; i++) {
-                html += generateButton(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id);
+                html += generateButton(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id,json.drinks[(ammont + i)].image);
             }
             html += '</div><div class="row r2">';
             ct = 3;
         }
         do {
-            html += generateButton(json.drinks[(ammont + ct)].name, json.drinks[(ammont + ct)].id);
+            html += generateButton(json.drinks[(ammont + ct)].name, json.drinks[(ammont + ct)].id,json.drinks[(ammont + ct)].image);
             ct++;
         } while (ct < rest);
         html += '</div></div>';
@@ -162,6 +172,7 @@ function closeEitherModal() {
 // Drinkmodal
 function resetDM() {
     document.getElementById("DM_name").innerHTML = "";
+    document.getElementById("DM_image").innerHTML = "";
     document.getElementById("DM_List").innerHTML = "<div id=\"DM_ing_loader\"><div><div class=\"lds-roller\"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>";
     document.getElementById("DM_zubereiten").onclick = function () {
     };
@@ -189,7 +200,19 @@ function openDrinkModal(drinkinfo) {
             document.getElementById("mod-drink").className = "";
         }, 700);
         let d_name = drinkinfo.getAttribute("d_name");
+<<<<<<< HEAD
         document.getElementById("DM_name").innerHTML = d_name;
+=======
+        let d_image=drinkinfo.getAttribute("d_image");
+        // "<u>" + drinkinfo.getAttribute("d_name"); Si quiero que el nombre me salga subrayado
+        //Si es que la info contiene alc sale alc alado del nombre
+        //if (drinkinfo.className.includes("alc")) {
+        //    d_name += "  (alc) ";
+        //}
+        //d_name += "</u>";
+        document.getElementById("DM_name").innerHTML = '<div>'+ d_name + '</div>';
+        document.getElementById("DM_image").innerHTML = '<div class="image"><img src="'+d_image+'" alt="'+d_name+'" width="85" height="100"></div>';
+>>>>>>> 336171a7c9667a6f55614707db728e204f42622f
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
         if (testing) {
             DM_status = DM_State.LOADING;
@@ -201,6 +224,7 @@ function openDrinkModal(drinkinfo) {
     }
 }
 
+//Indica los ingredientes 
 function showIngredientsAndButton(json) {
     let drinkinfo = JSON.parse(json);
 console.log(drinkinfo);
