@@ -38,7 +38,7 @@ const TopicCloseAllValves = "Hector9000/closeAllValves";
 
 //--------- Testing start ---------------
 
-const testing = true;
+const testing = false;
 
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
@@ -55,11 +55,8 @@ var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true},{"n
 
 //--------- Testing end ---------------
 
-function generateButton(name, id, alc) {
+function generateButton(name, id) {
     html = '<div onclick="openDrinkModal(this)" class="button" ';
-    if (alc) {
-        html += 'src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"';
-    }
     html += '" d_id="' + id + '" d_name="' + name + '"><div class="name">' + name + "</div></div>";
     return html;
 }
@@ -192,12 +189,6 @@ function openDrinkModal(drinkinfo) {
             document.getElementById("mod-drink").className = "";
         }, 700);
         let d_name = drinkinfo.getAttribute("d_name");
-        // "<u>" + drinkinfo.getAttribute("d_name"); Si quiero que el nombre me salga subrayado
-        //Si es que la info contiene alc sale alc alado del nombre
-        //if (drinkinfo.className.includes("alc")) {
-        //    d_name += "  (alc) ";
-        //}
-        //d_name += "</u>";
         document.getElementById("DM_name").innerHTML = d_name;
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
         if (testing) {
@@ -348,6 +339,10 @@ function keydown(e) {
     }
 }
 
+//Funcion para abir la nueva pagina de bebidas
+function bebidas(){
+    location.href="/home/pi/Hector9000WebUI/BebidasUI/drinks.html";
+}
 function right() {
     if (MM_status === MM_State.RUNNING) {
         closeEitherModal();
