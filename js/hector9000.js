@@ -38,12 +38,12 @@ const TopicCloseAllValves = "Hector9000/closeAllValves";
 
 //--------- Testing start ---------------
 
-const testing = true;
+const testing = false;
 
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
-    '"ingredients": [' +
-    '{"name": "Cola", "ammount": 150, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},' +
+    '"ingredients": [' 
+    '{"name": "Cola", "ammount": 150},' +
     '{"name": "Club-Mate", "ammount": 100},' +
     '{"name": "Rum", "ammount": 50},' +
     '{"name": "Wasser", "ammount": 200},' +
@@ -51,7 +51,7 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     ']' +
     '}';
     
-var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"../Hector9000WebUI/Images/margarita-frozen.png"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
+var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
 
 //--------- Testing end ---------------
 
@@ -95,6 +95,7 @@ started = true;
         if (rest >= 4) {
             for (i = 0; i < 3; i++) {
                 html += generateButton(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id,json.drinks[(ammont + i)].image);
+                //console.log(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id,json.drinks[(ammont + i)].image);
             }
             html += '</div><div class="row r2">';
             ct = 3;
@@ -195,12 +196,6 @@ function openDrinkModal(drinkinfo) {
         }, 700);
         let d_name = drinkinfo.getAttribute("d_name");
         let d_image=drinkinfo.getAttribute("d_image");
-        // "<u>" + drinkinfo.getAttribute("d_name"); Si quiero que el nombre me salga subrayado
-        //Si es que la info contiene alc sale alc alado del nombre
-        //if (drinkinfo.className.includes("alc")) {
-        //    d_name += "  (alc) ";
-        //}
-        //d_name += "</u>";
         document.getElementById("DM_name").innerHTML = '<div>'+ d_name + '</div>';
         document.getElementById("DM_image").innerHTML = '<div class="image"><img src="'+d_image+'" alt="'+d_name+'" width="85" height="100"></div>';
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
@@ -214,11 +209,18 @@ function openDrinkModal(drinkinfo) {
     }
 }
 
+//Funcion para obtener los elementos
+function getFields(input, field) {
+    var output = [];
+    for (var i=0; i < input.length ; ++i)
+        output.push(input[i][field]);
+    return output;
+}
+
 //Indica los ingredientes 
 function showIngredientsAndButton(json) {
     let drinkinfo = JSON.parse(json);
-console.log(drinkinfo);
-console.log(document.getElementById("mod-drink"));
+    console.log(document.getElementById("mod-drink"));
     if (drinkinfo.id != document.getElementById("mod-drink").getAttribute("d_id")) {
         console.log("not doing stuff");
     return;
@@ -228,7 +230,7 @@ console.log(document.getElementById("mod-drink"));
         document.getElementById("DM_ing_loader").className = "inv";
         document.getElementById("DM_zubereiten").disabled = false;
         document.getElementById("DM_zubereiten").onclick = function () {
-            doseDrink(drinkinfo.id);
+            doseDrink(drinkinfo.id,drinkinfo.ingredients);
         };
         for (let i = 0; i < drinkinfo.ingredients.length; i++) {
             document.getElementById("DM_List").innerHTML += '<div class="DM_ing"><div class="DM_ing_amm">' + drinkinfo.ingredients[i].ammount + 'ml</div><div class="DM_ing_name">' + drinkinfo.ingredients[i].name + '</div></div>';
@@ -238,6 +240,49 @@ console.log(document.getElementById("mod-drink"));
 console.log(DM_status);
 }
 
+function sabor(a,b,c){
+    let beb1,init1,beb2,init2,beb3,init3,beb4,init4,beb5,init5;
+    for (i=0;i<=c;i++){    
+        switch(a[i]){
+            case "gren":
+                beb1=b[i];
+                init1=localStorage.getItem("beb1");
+                init1=init1-beb1;
+                localStorage.setItem("beb1",init1);
+            break;
+            case "rum":
+                beb2=b[i];
+                init2=localStorage.getItem("beb2");
+                init2=init2-beb2;
+                localStorage.setItem("beb2",init2);
+            break;
+            case "vodka":
+                beb3=b[i];
+                init3=localStorage.getItem("beb3");
+                init3=init3-beb3;
+                localStorage.setItem("beb3",init3);
+            break;
+            case "gin":
+                beb4=b[i];
+                init4=localStorage.getItem("beb4");
+                init4=init4-beb4;
+                localStorage.setItem("beb4",init4);
+            break;
+            case "tequila":
+                beb5=b[i];
+                init5=localStorage.getItem("beb5");
+                init4=init4-beb4;
+                localStorage.setItem("beb4",init4);
+            break;
+            default:
+        }
+    }
+}
+
+//Bebidas
+function bebidas(){
+    location.href = "/home/pi/Hector9000WebUI/drinks.html";
+}
 
 // Configmodal
 function resetCM() {
@@ -272,7 +317,12 @@ function closeModalBack() {
     document.getElementById("modalclose").className = "MC_cls";
 }
 
-function doseDrink(id) {
+function doseDrink(id,json) {
+    let control= json;
+    var long= control.length;
+    var nombres = getFields(control,"name");
+    var cantidad = getFields(control,"ammount");
+    sabor(nombres,cantidad,long);
     if (DM_status === DM_State.RUNNING) {
         if (testing) {
             MM_status = MM_State.FIXED;
@@ -344,7 +394,6 @@ function doseEnded() {
 }
 
 //Keyevents
-
 function keydown(e) {
     if (e.code === "ArrowRight" || e.code === "KeyD") {
         right();

@@ -403,10 +403,16 @@ body {
 /*Posicion del logo en la pantalla de configuracion*/
 #logo2{
     position: fixed;
-    left: 350px;
+    left: 325px;
     bottom: 25px; 
 }
 
+/*Posicion del logo en los ingresos de las bebidas*/
+#logo3{
+    position: fixed;
+    left: 80px;
+    top: 80px; 
+}
 /*Ubicación de la palabra cocteles en la mitad*/
 #cocteles{
     position: fixed; 
@@ -469,11 +475,24 @@ body {
     font-family: "Artil";
     font-weight: thin;
 }
+/*Tamano y ancho de las letras de la calculador*/
+#c10{
+    font-size: 1.2rem;
+    font-family: "Artil";
+    font-weight: thin; 
+}
 /*Tamaño y ancho de las letras de volver y preparar bebida*/
 #h11{
     font-size: 1rem;
     font-family: "Artil_Preparar";
     font-weight: thin;
+}
+/*Tamano y tipo de letra para los hexagonos*/
+#h12{
+    font-size: 1rem;
+    font-family: "Artil_Cocteles";
+    font-weight: thin;
+    text-align: center;
 }
 #hconf{
     font-size: 2rem;
@@ -502,6 +521,74 @@ body {
     border: 3px groove rgb(255, 255, 255);
     border-radius: 5px;
 }
+/*Botones dentro de las bebidas*/
+.CM_button2 {
+    margin: auto;
+    min-width: 20px;
+    height: auto;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    display: flex;
+    text-align: center;
+    justify-content:center;
+    align-items:center;
+    width: 100px;
+    border: 3px groove rgb(255, 255, 255);
+    border-radius: 5px;
+}
+/*Para el boton de regreso*/
+.contenedor{
+    text-align: center;
+    margin-top: 25px;
+}
+.btn1{
+    border: 3px groove rgb(255, 255, 255);
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+/*Para los hexagonos de las bebidas*/
+.container{
+    margin-top:50px;
+    margin-left:150px;
+    width:300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.container .hexagonArea{
+    display:flex;
+}
+
+.container .hexagonArea .hexagon{
+    position:relative;
+    width:75px;
+    height:100px;
+    margin: 0 10px;
+    clip-path: polygon(0 25%, 50% 0,100% 25%,100% 75%,50% 100%, 0 75%);
+    background-color: rgb(56, 110, 184); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/*boton para regresar al menu principal*/
+.CM_back{
+    height: auto;
+    width: auto;
+    border: 3px groove rgb(255, 255, 255);
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    margin: auto;
+}
 
 .CM_button > div{
     margin: auto;
@@ -509,12 +596,61 @@ body {
     text-align: center;
 }
 
+/*Para el teclado*/
+.flex{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.numPan{
+    border-radius:10px;
+    background: #000;
+}
+
+.numPan .disp input{
+    margin-top:5px;
+    width:300px;
+    padding: 8px;
+    outline: none;
+    border-radius: none;
+    background: none;
+    text-align: center;
+    color:#ffffff;
+    font-size: 1.5rem;
+    font-family: "Artil_Cocteles";
+    font-weight: thin;
+}
+
+.numPan .nums > .r div{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border: 1px solid #F0F0F0; 
+    border-radius:2px;
+    cursor: pointer;
+}
+
+.numPan .nums > .m div{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border: 1px solid #F0F0F0; 
+    border-radius:2px;
+    cursor: pointer;
+}
 /*Espaciado entre la primera fila de botones*/
 #CM_buttons {
     text-align: auto;
     height: 20%;
     display: flex;
     flex-direction: row;
+}
+
+/*Para el boton de regreso*/
+#CM_backs{
+    text-align: center;
+    height: 20%;
+    display: flex;
 }
 
 #CM_config {
@@ -527,7 +663,6 @@ body {
     height: 20%;
     display: flex;
     flex-direction: row;
-
 }
 
 /*Espaciado entre la tercera fila de botones*/
