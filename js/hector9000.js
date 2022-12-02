@@ -55,6 +55,11 @@ var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "im
 
 //--------- Testing end ---------------
 
+<<<<<<< HEAD
+function generateButton(name, id) {
+    html = '<div onclick="openDrinkModal(this)" class="button" ';
+    html += '" d_id="' + id + '" d_name="' + name + '"><div class="name">' + name + "</div></div>";
+=======
 function generateButton(name, id,image) {
     html = '<div onclick="openDrinkModal(this)" class="button" ';
     // if (alc) {
@@ -62,6 +67,7 @@ function generateButton(name, id,image) {
     // }
     html += '" d_id="' + id + '" d_name="' + name + '"d_image="'+ image + '">';
     html += '<div class="image"><img src="'+image+'" alt="'+name+'" width="85" height="100"></div><br><div class="name">' + name + '</div></div>';
+>>>>>>> 336171a7c9667a6f55614707db728e204f42622f
     return html;
 }
 
@@ -195,9 +201,13 @@ function openDrinkModal(drinkinfo) {
             document.getElementById("mod-drink").className = "";
         }, 700);
         let d_name = drinkinfo.getAttribute("d_name");
+<<<<<<< HEAD
+        document.getElementById("DM_name").innerHTML = d_name;
+=======
         let d_image=drinkinfo.getAttribute("d_image");
         document.getElementById("DM_name").innerHTML = '<div>'+ d_name + '</div>';
         document.getElementById("DM_image").innerHTML = '<div class="image"><img src="'+d_image+'" alt="'+d_name+'" width="85" height="100"></div>';
+>>>>>>> 336171a7c9667a6f55614707db728e204f42622f
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
         if (testing) {
             DM_status = DM_State.LOADING;
@@ -402,6 +412,10 @@ function keydown(e) {
     }
 }
 
+//Funcion para abir la nueva pagina de bebidas
+function bebidas(){
+    location.href="/home/pi/Hector9000WebUI/BebidasUI/drinks.html";
+}
 function right() {
     if (MM_status === MM_State.RUNNING) {
         closeEitherModal();
