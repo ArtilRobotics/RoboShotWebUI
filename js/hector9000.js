@@ -38,11 +38,11 @@ const TopicCloseAllValves = "Hector9000/closeAllValves";
 
 //--------- Testing start ---------------
 
-const testing = false;
+const testing = true;
 
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
-    '"ingredients": [' 
+    '"ingredients": [' +
     '{"name": "Cola", "ammount": 150},' +
     '{"name": "Club-Mate", "ammount": 100},' +
     '{"name": "Rum", "ammount": 50},' +
@@ -50,6 +50,7 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '{"name": "O-Saft", "ammount": 10}' +
     ']' +
     '}';
+    
     
 var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
 
@@ -99,7 +100,7 @@ started = true;
         if (rest >= 4) {
             for (i = 0; i < 3; i++) {
                 html += generateButton(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id,json.drinks[(ammont + i)].image);
-                //console.log(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id,json.drinks[(ammont + i)].image);
+                console.log(json.drinks[(ammont + i)].name, json.drinks[(ammont + i)].id,json.drinks[(ammont + i)].image);
             }
             html += '</div><div class="row r2">';
             ct = 3;
@@ -199,13 +200,10 @@ function openDrinkModal(drinkinfo) {
             document.getElementById("mod-drink").className = "";
         }, 700);
         let d_name = drinkinfo.getAttribute("d_name");
-<<<<<<< HEAD
         document.getElementById("DM_name").innerHTML = d_name;
-=======
         let d_image=drinkinfo.getAttribute("d_image");
         document.getElementById("DM_name").innerHTML = '<div>'+ d_name + '</div>';
         document.getElementById("DM_image").innerHTML = '<div class="image"><img src="'+d_image+'" alt="'+d_name+'" width="85" height="100"></div>';
->>>>>>> 336171a7c9667a6f55614707db728e204f42622f
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
         if (testing) {
             DM_status = DM_State.LOADING;
@@ -252,31 +250,31 @@ function sabor(a,b,c){
     let beb1,init1,beb2,init2,beb3,init3,beb4,init4,beb5,init5;
     for (i=0;i<=c;i++){    
         switch(a[i]){
-            case "gren":
+            case "Cola":
                 beb1=b[i];
                 init1=localStorage.getItem("beb1");
                 init1=init1-beb1;
                 localStorage.setItem("beb1",init1);
             break;
-            case "rum":
+            case "Club-Mate":
                 beb2=b[i];
                 init2=localStorage.getItem("beb2");
                 init2=init2-beb2;
                 localStorage.setItem("beb2",init2);
             break;
-            case "vodka":
+            case "Rum":
                 beb3=b[i];
                 init3=localStorage.getItem("beb3");
                 init3=init3-beb3;
                 localStorage.setItem("beb3",init3);
             break;
-            case "gin":
+            case "Wasser":
                 beb4=b[i];
                 init4=localStorage.getItem("beb4");
                 init4=init4-beb4;
                 localStorage.setItem("beb4",init4);
             break;
-            case "tequila":
+            case "O-saft":
                 beb5=b[i];
                 init5=localStorage.getItem("beb5");
                 init4=init4-beb4;

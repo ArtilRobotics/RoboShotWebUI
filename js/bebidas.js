@@ -92,11 +92,7 @@ function closeModalBack() {
 function back(){
     location.href = "/home/pi/Hector9000WebUI/Main.html";
 }
-//Funcion para borrar
-function backspace(b){
-    console.log(b);
-    //return b.slice(0, b.lenght-1);
-}
+
 //Funciones para almacenar 
 function beb1(){
     var beb1= document.getElementById("Beb1").value;
