@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ROBOSHOT</title>
+  <script src="js/bebidas.js"></script>
+    <link href="css/fontawesome/fontawesome.css" rel="stylesheet" type="text/css"/>
+    <link href="css/hector9000.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+</head>
+<body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js"
+    import { } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js"
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUdxI-Ik4Wegs3-saiOxXI-GrQPZL522Y",
+      authDomain: "roboshot.firebaseapp.com",
+      projectId: "roboshot",
+      storageBucket: "roboshot.appspot.com",
+      messagingSenderId: "1080619716620",
+      appId: "1:1080619716620:web:8d5e7800470335f46f9e29",
+      measurementId: "G-RJT2WTDJTT"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+<!-- All the content -->
+<div id="content">
+  
+  <div id="header">
+      <div id="title">
+          <span id="h10">ROBOSHOT 2</span>
+      </div>
+      <div id="logo">
+          <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="100" height="">
+      </div>
+  </div>
+  <div class="container">
+    <div class="hexagonArea first">
+      <div id="h1" class="hexagon" onclick="openBebidaModal(1)">
+        <span id="h12">BEBIDA</span>
+        <span id="h1">1</span>
+      </div>
+      <div id="h1" class="hexagon" onclick="openBebidaModal(2)">
+        <span id="h12">BEBIDA</span>
+        <span id="h2">2</span>
+      </div>
+      <div class="hexagon" onclick="openBebidaModal(3)">
+        <span id="h12">BEBIDA</span>
+        <span id="h3">3</span>
+      </div>
+      <div class="hexagon" onclick="openBebidaModal(4)">
+        <span id="h12">BEBIDA</span>
+        <span id="h4">4</span>
+      </div>
+      <div class="hexagon" onclick="openBebidaModal(5)">
+        <span id="h12">BEBIDA</span>
+        <span id="h5">5</span>
+      </div>
+    </div>
+    <div class="hexagonArea second">
+      <div class="hexagon" onclick="openBebidaModal(6)">
+        <span id="h12">BEBIDA</span>
+        <span id="h12">6</span>
+      </div>
+      <div class="hexagon" onclick="openBebidaModal(7)">
+        <span id="h12">BEBIDA</span>
+        <span id="h12">7</span>
+      </div>
+      <div class="hexagon" onclick="openBebidaModal(8)">
+        <span id="h12">BEBIDA</span>
+        <span id="h12">8</span>
+      </div>
+      <div class="hexagon" onclick="openBebidaModal(9)">
+        <span id="h12">BEBIDA</span>
+        <span id="h12">9</span>
+      </div>
+    </div>
+    <div class="hexagonArea third">
+      <div class="hexagon" onclick="openBebidaModal(10)">
+        <span id="h12">BEBIDA 10</span>
+      </div>
+      <div class="hexagon" onclick="openBebidaModal(11)">
+        <span id="h12">BEBIDA 11</span>
+      </div>
+      <div class="hexagon" onclick="openBebidaModal(12)">
+        <span id="h12">BEBIDA 12</span>
+      </div>
+    </div>
+  </div>
+  <div class="contenedor">
+    <button class="btn1" onclick="back()">
+        <span id="h10">VOLVER</span>
+    </button>
+  </div>
+</div>
+<div class="modal" id="mainModal">
+  <div class="inv" id="mod-bebida1">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 1</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="array" id="Beb1">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c1">1</span></div>
+                <div> <span id="c1">2</span></div>
+                <div> <span id="c1">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c1">4</span></div>
+                <div> <span id="c1">5</span></div>
+                <div> <span id="c1">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c1">7</span></div>
+                <div> <span id="c1">8</span></div>
+                <div> <span id="c1">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c1"></span></div>
+                <div> <span id="c1">0</span></div>
+                <div>
+                  <span id="d1">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(1)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb1()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida2">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 2</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb2">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c2">1</span></div>
+                <div> <span id="c2">2</span></div>
+                <div> <span id="c2">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c2">4</span></div>
+                <div> <span id="c2">5</span></div>
+                <div> <span id="c2">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c2">7</span></div>
+                <div> <span id="c2">8</span></div>
+                <div> <span id="c2">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c2"></span></div>
+                <div> <span id="c2">0</span></div>
+                <div>
+                  <span id="d2">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(2)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb2()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida3">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 3</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb3">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c3">1</span></div>
+                <div> <span id="c3">2</span></div>
+                <div> <span id="c3">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c3">4</span></div>
+                <div> <span id="c3">5</span></div>
+                <div> <span id="c3">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c3">7</span></div>
+                <div> <span id="c3">8</span></div>
+                <div> <span id="c3">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c3"></span></div>
+                <div> <span id="c3">0</span></div>
+                <div>
+                  <span id="d3">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(3)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb3()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida4">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 4</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb4">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c4">1</span></div>
+                <div> <span id="c4">2</span></div>
+                <div> <span id="c4">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c4">4</span></div>
+                <div> <span id="c4">5</span></div>
+                <div> <span id="c4">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c4">7</span></div>
+                <div> <span id="c4">8</span></div>
+                <div> <span id="c4">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c4"></span></div>
+                <div> <span id="c4">0</span></div>
+                <div>
+                  <span id="d4">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(4)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb4()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida5">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 5</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb5">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c5">1</span></div>
+                <div> <span id="c5">2</span></div>
+                <div> <span id="c5">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c5">4</span></div>
+                <div> <span id="c5">5</span></div>
+                <div> <span id="c5">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c5">7</span></div>
+                <div> <span id="c5">8</span></div>
+                <div> <span id="c5">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c5"></span></div>
+                <div> <span id="c5">0</span></div>
+                <div>
+                  <span id="d5">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(5)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb5()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida6">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 6</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb6">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c6">1</span></div>
+                <div> <span id="c6">2</span></div>
+                <div> <span id="c6">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c6">4</span></div>
+                <div> <span id="c6">5</span></div>
+                <div> <span id="c6">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c6">7</span></div>
+                <div> <span id="c6">8</span></div>
+                <div> <span id="c6">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c6"></span></div>
+                <div> <span id="c6">0</span></div>
+                <div>
+                  <span id="d6">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(6)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb6()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida7">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 7</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb7">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c7">1</span></div>
+                <div> <span id="c7">2</span></div>
+                <div> <span id="c7">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c7">4</span></div>
+                <div> <span id="c7">5</span></div>
+                <div> <span id="c7">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c7">7</span></div>
+                <div> <span id="c7">8</span></div>
+                <div> <span id="c7">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c7"></span></div>
+                <div> <span id="c7">0</span></div>
+                <div>
+                  <span id="d7">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(7)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb7()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida8">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 8</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb8">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c8">1</span></div>
+                <div> <span id="c8">2</span></div>
+                <div> <span id="c8">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c8">4</span></div>
+                <div> <span id="c8">5</span></div>
+                <div> <span id="c8">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c8">7</span></div>
+                <div> <span id="c8">8</span></div>
+                <div> <span id="c8">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c8"></span></div>
+                <div> <span id="c8">0</span></div>
+                <div>
+                  <span id="d8">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(8)">
+                  <span> SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb8()">
+                <span> ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida9">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 9</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb9">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c9">1</span></div>
+                <div> <span id="c9">2</span></div>
+                <div> <span id="c9">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c9">4</span></div>
+                <div> <span id="c9">5</span></div>
+                <div> <span id="c9">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c9">7</span></div>
+                <div> <span id="c9">8</span></div>
+                <div> <span id="c9">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c9"></span></div>
+                <div> <span id="c9">0</span></div>
+                <div>
+                  <span id="d9">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(9)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb9()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida10">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 10</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb10">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c10">1</span></div>
+                <div> <span id="c10">2</span></div>
+                <div> <span id="c10">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c10">4</span></div>
+                <div> <span id="c10">5</span></div>
+                <div> <span id="c10">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c10">7</span></div>
+                <div> <span id="c10">8</span></div>
+                <div> <span id="c10">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c10"></span></div>
+                <div> <span id="c10">0</span></div>
+                <div>
+                  <span id="d10">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(10)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb10()">
+                <span id>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida11">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 11</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb11">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c11">1</span></div>
+                <div> <span id="c11">2</span></div>
+                <div> <span id="c11">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c11">4</span></div>
+                <div> <span id="c11">5</span></div>
+                <div> <span id="c11">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c11">7</span></div>
+                <div> <span id="c11">8</span></div>
+                <div> <span id="c11">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c11"></span></div>
+                <div> <span id="c11">0</span></div>
+                <div>
+                  <span id="d11">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(11)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb11()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+  <div class="inv" id="mod-bebida12">
+    <div id="CM_content">
+        <div id="CM_config">
+            <span id="h9"><u>BEBIDA 12</u></a></span>
+        </div>
+        <span id="h11">Cantidad en ml:</span>
+        <div class="flex">
+          <div class="numPan">
+            <div class="disp">
+              <input type="number" id="Beb12">
+            </div>
+            <div class="nums">
+              <div class="flex r r1">
+                <div> <span id="c12">1</span></div>
+                <div> <span id="c12">2</span></div>
+                <div> <span id="c12">3</span></div>
+              </div>
+              <div class="flex r r2">
+                <div> <span id="c12">4</span></div>
+                <div> <span id="c12">5</span></div>
+                <div> <span id="c12">6</span></div>
+              </div>
+              <div class="flex r r3">
+                <div> <span id="c12">7</span></div>
+                <div> <span id="c12">8</span></div>
+                <div> <span id="c12">9</span></div>
+              </div>
+              <div class="flex r r4">
+                <div> <span id="c12"></span></div>
+                <div> <span id="c12">0</span></div>
+                <div>
+                  <span id="d12">  <i class="fas fa-backspace" style="margin-top: 1px; margin-bottom: auto;"></i></span>
+                </div>
+              </div>
+              <div id="CM_buttons">
+                <div class="CM_button2" onclick="closeConfigModal(12)">
+                  <span>SALIR</span>
+               </div>
+               <div class="CM_button2" onclick="beb12()">
+                <span>ACEPTAR</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div id="logo3">
+            <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="75" height="">
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="MC_cls" id="modalclose" onclick="closeEitherModal()"></div>
+</div>
+<script>
+  var btn=document.querySelectorAll(".r > div");
+  var inp=document.querySelectorAll("input");
+    btn.forEach(val=>{
+    val.addEventListener("click",()=>{
+      function back(id){
+        var a=document.getElementById("Beb"+id).value+=val.innerText;
+        console.log(a);
+        a=a/10;
+        a=Math.trunc(a)
+        document.getElementById("Beb"+id).value=a;
+      }
+      switch (val.firstElementChild.id) {
+        case "c1":
+          document.getElementById("Beb1").value+=val.innerText;
+        break;
+        case "d1":
+          back(1);  
+        break;
+        case "c2":
+          document.getElementById("Beb2").value+=val.innerText;
+        break;
+        case "d2":
+          back(2);  
+        break;
+        case "c3":
+          document.getElementById("Beb3").value+=val.innerText;
+        break;
+        case "d3":
+          back(3);  
+        break;
+        case "c4":
+          document.getElementById("Beb4").value+=val.innerText;
+        break;
+        case "d4":
+          back(4);  
+        break;
+        case "c5":
+          document.getElementById("Beb5").value+=val.innerText;
+        break;
+        case "d5":
+          back(5);  
+        break;
+        case "c6":
+          document.getElementById("Beb6").value+=val.innerText;
+        break;
+        case "d6":
+          back(6);  
+        break;
+        case "c7":
+          document.getElementById("Beb7").value+=val.innerText;
+        break;
+        case "d7":
+          back(7);  
+        break;
+        case "c8":
+          document.getElementById("Beb8").value+=val.innerText;
+        break;
+        case "d8":
+          back(8);  
+        break;
+        case "c9":
+          document.getElementById("Beb9").value+=val.innerText;
+        break;
+        case "d9":
+          back(9);  
+        break;
+        case "c10":
+          document.getElementById("Beb10").value+=val.innerText;
+        break;
+        case "d10":
+          back(10);  
+        break;
+        case "c11":
+          document.getElementById("Beb10").value+=val.innerText;
+        break;
+        case "d11":
+          back(11);  
+        break;
+        case "c12":
+          document.getElementById("Beb10").value+=val.innerText;
+        break;
+        case "d12":
+          back(12);  
+        break;
+        default:
+          break;
+      }
+    })
+  })
+</script>
+</body>
+</html>
