@@ -55,11 +55,10 @@ var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "im
 
 //--------- Testing end ---------------
 
-<<<<<<< HEAD
 function generateButton(name, id) {
     html = '<div onclick="openDrinkModal(this)" class="button" ';
     html += '" d_id="' + id + '" d_name="' + name + '"><div class="name">' + name + "</div></div>";
-=======
+}
 function generateButton(name, id,image) {
     html = '<div onclick="openDrinkModal(this)" class="button" ';
     // if (alc) {
@@ -67,7 +66,6 @@ function generateButton(name, id,image) {
     // }
     html += '" d_id="' + id + '" d_name="' + name + '"d_image="'+ image + '">';
     html += '<div class="image"><img src="'+image+'" alt="'+name+'" width="85" height="100"></div><br><div class="name">' + name + '</div></div>';
->>>>>>> 336171a7c9667a6f55614707db728e204f42622f
     return html;
 }
 
