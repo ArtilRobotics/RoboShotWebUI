@@ -1,3 +1,4 @@
+  
 const DM_State = {
     'CLOSED': 0,
     'OPENING': 1,
@@ -16,6 +17,7 @@ const MM_State = {
     'CLOSING': 4,
 };
 
+var b1=0,b2=0,b3=0,b4=0,b5=0;
 var started = false;
 var DM_status = DM_State.CLOSED;
 var MM_status = MM_State.CLOSED;
@@ -69,6 +71,7 @@ function generateButton(name, id,image) {
     html += '<div class="image"><img src="'+image+'" alt="'+name+'" width="85" height="100"></div><br><div class="name">' + name + '</div></div>';
     return html;
 }
+
 
 function generateButtons(drinksjson) {
 started = true;
@@ -246,39 +249,51 @@ function showIngredientsAndButton(json) {
 console.log(DM_status);
 }
 
+
+//Funcion para registrar el consumo de las bebidas
 function sabor(a,b,c){
-    let beb1,init1,beb2,init2,beb3,init3,beb4,init4,beb5,init5;
+    var beb1,init1,beb2,init2,beb3,init3,beb4,init4,beb5,init5;
     for (i=0;i<=c;i++){    
         switch(a[i]){
             case "Cola":
                 beb1=b[i];
+                b1=b1+beb1;
                 init1=localStorage.getItem("beb1");
                 init1=init1-beb1;
                 localStorage.setItem("beb1",init1);
+                localStorage.setItem("ConsumoBeb1",b1);
             break;
             case "Club-Mate":
                 beb2=b[i];
+                b2=b2+beb2;
                 init2=localStorage.getItem("beb2");
                 init2=init2-beb2;
                 localStorage.setItem("beb2",init2);
+                localStorage.setItem("ConsumoBeb2",beb2);
             break;
             case "Rum":
                 beb3=b[i];
+                b3=b3+beb3;
                 init3=localStorage.getItem("beb3");
                 init3=init3-beb3;
                 localStorage.setItem("beb3",init3);
+                localStorage.setItem("ConsumoBeb3",beb3);
             break;
             case "Wasser":
                 beb4=b[i];
+                b4=b4+beb4;
                 init4=localStorage.getItem("beb4");
                 init4=init4-beb4;
                 localStorage.setItem("beb4",init4);
+                localStorage.setItem("ConsumoBeb4",beb4);
             break;
             case "O-saft":
                 beb5=b[i];
+                b5=b5+beb5;
                 init5=localStorage.getItem("beb5");
-                init4=init4-beb4;
-                localStorage.setItem("beb4",init4);
+                init5=init5-beb5;
+                localStorage.setItem("beb5",init5);
+                localStorage.setItem("ConsumoBeb5",beb5);
             break;
             default:
         }
@@ -412,6 +427,8 @@ function keydown(e) {
 function bebidas(){
     location.href="/home/pi/Hector9000WebUI/BebidasUI/drinks.html";
 }
+//////////////////////////////
+
 function right() {
     if (MM_status === MM_State.RUNNING) {
         closeEitherModal();
@@ -529,3 +546,6 @@ function setUpMQTT() {
     mqtt.onMessageArrived = messageArrived;
     mqtt.connect(options);
 }
+
+
+

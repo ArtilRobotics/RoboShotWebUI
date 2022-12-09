@@ -142,3 +142,5 @@ function beb12(){
     var beb12= document.getElementById("Beb12").value;
     localStorage.setItem("beb12",beb12);
 }
+
+////////////////////////////////////////////////////////////

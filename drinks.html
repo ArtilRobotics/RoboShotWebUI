@@ -7,32 +7,9 @@
     <link href="css/hector9000.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
+
 </head>
 <body>
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-    import { } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js"
-    import { } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js"
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyDUdxI-Ik4Wegs3-saiOxXI-GrQPZL522Y",
-      authDomain: "roboshot.firebaseapp.com",
-      projectId: "roboshot",
-      storageBucket: "roboshot.appspot.com",
-      messagingSenderId: "1080619716620",
-      appId: "1:1080619716620:web:8d5e7800470335f46f9e29",
-      measurementId: "G-RJT2WTDJTT"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
 <!-- All the content -->
 <div id="content">
   
@@ -142,9 +119,9 @@
                 <div class="CM_button2" onclick="closeConfigModal(1)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb1()">
-                <span>ACEPTAR</span>
-              </div>
+                <div class="CM_button2" id="Button1" onclick="beb1()">
+                  <span>ACEPTAR</span>
+                </div>
             </div>
           </div>
           </div>
@@ -192,7 +169,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(2)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb2()">
+               <div class="CM_button2" id="Button2" onclick="beb2()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -242,7 +219,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(3)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb3()">
+               <div class="CM_button2" id="Button3" onclick="beb3()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -292,7 +269,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(4)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb4()">
+               <div class="CM_button2" id="Button4" onclick="beb4()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -342,7 +319,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(5)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb5()">
+               <div class="CM_button2" id="Button5" onclick="beb5()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -392,7 +369,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(6)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb6()">
+               <div class="CM_button2" id="Button6" onclick="beb6()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -708,24 +685,29 @@
 
 <div class="MC_cls" id="modalclose" onclick="closeEitherModal()"></div>
 </div>
-<script>
+<script type='module'>
+
+  //Ingreso de datos mediante el pad
   var btn=document.querySelectorAll(".r > div");
   var inp=document.querySelectorAll("input");
     btn.forEach(val=>{
     val.addEventListener("click",()=>{
       function back(id){
         var a=document.getElementById("Beb"+id).value+=val.innerText;
-        console.log(a);
-        a=a/10;
-        a=Math.trunc(a)
-        document.getElementById("Beb"+id).value=a;
+        if(a<10){
+          document.getElementById("Beb"+id).value='';
+        }else{
+          a=a/10;
+          a=Math.trunc(a)
+          document.getElementById("Beb"+id).value=a;
+        }
       }
       switch (val.firstElementChild.id) {
         case "c1":
           document.getElementById("Beb1").value+=val.innerText;
         break;
         case "d1":
-          back(1);  
+          back(1);
         break;
         case "c2":
           document.getElementById("Beb2").value+=val.innerText;
@@ -794,10 +776,82 @@
           back(12);  
         break;
         default:
-          break;
+        break;
       }
     })
   })
+    
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+  import { } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js"
+  import { getFirestore,collection,addDoc,doc,setDoc,updateDoc,deleteDoc,deleteField} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js"
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDUdxI-Ik4Wegs3-saiOxXI-GrQPZL522Y",
+    authDomain: "roboshot.firebaseapp.com",
+    projectId: "roboshot",
+    storageBucket: "roboshot.appspot.com",
+    messagingSenderId: "1080619716620",
+    appId: "1:1080619716620:web:8d5e7800470335f46f9e29",
+    measurementId: "G-RJT2WTDJTT"
+  };
+
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+
+  const analytics = getAnalytics(app);
+  //Insertar DATA
+
+  async function InsertData(id){
+    var bebida=0;
+    switch(id){
+      case 1:
+         bebida=localStorage.getItem("beb1");
+      break;
+      case 2:
+         bebida=localStorage.getItem("beb2");
+      break;
+      case 3:
+         bebida=localStorage.getItem("beb3");
+      break;
+      case 4:
+         bebida=localStorage.getItem("beb4");
+      break;
+      case 5:
+         bebida=localStorage.getItem("beb5");
+      break;
+      case 6:
+         bebida=localStorage.getItem("beb6");
+      break;
+      default:
+      break;
+    }
+    var ref= doc(db,"Volumen inicial de las bebidas","Bebida"+id);
+    const docRef = await setDoc(
+      ref,{
+        Cantidad_en_ml:bebida,
+      }
+    )
+    .catch((error)=>{
+      alert("Unsuccesful operation,error:"+error);
+    });
+  }
+
+  //Eventos a botones
+  Button1.addEventListener("click",() => InsertData(1));
+  Button2.addEventListener("click",() => InsertData(2));
+  Button3.addEventListener("click",() => InsertData(3));
+  Button4.addEventListener("click",() => InsertData(4));
+  Button5.addEventListener("click",() => InsertData(5));
+  Button6.addEventListener("click",() => InsertData(6));
 </script>
+
 </body>
 </html>
