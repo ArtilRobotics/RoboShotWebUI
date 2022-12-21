@@ -17,7 +17,7 @@ const MM_State = {
     'CLOSING': 4,
 };
 
-var b1=0,b2=0,b3=0,b4=0,b5=0;
+
 var started = false;
 var DM_status = DM_State.CLOSED;
 var MM_status = MM_State.CLOSED;
@@ -40,7 +40,7 @@ const TopicCloseAllValves = "Hector9000/closeAllValves";
 
 //--------- Testing start ---------------
 
-const testing = true;
+const testing = false;
 
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
@@ -49,7 +49,7 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '{"name": "Club-Mate", "ammount": 100},' +
     '{"name": "Rum", "ammount": 50},' +
     '{"name": "Wasser", "ammount": 200},' +
-    '{"name": "O-Saft", "ammount": 10}' +
+    '{"name": "Moscow-Mule", "ammount": 10}' +
     ']' +
     '}';
     
@@ -238,9 +238,9 @@ function showIngredientsAndButton(json) {
     console.log("doing stuff");
         document.getElementById("DM_ing_loader").className = "inv";
         document.getElementById("DM_zubereiten").disabled = false;
-        document.getElementById("DM_zubereiten").onclick = function () {
+        document.getElementById("DM_zubereiten").addEventListener("click", function () {
             doseDrink(drinkinfo.id,drinkinfo.ingredients);
-        };
+        });
         for (let i = 0; i < drinkinfo.ingredients.length; i++) {
             document.getElementById("DM_List").innerHTML += '<div class="DM_ing"><div class="DM_ing_amm">' + drinkinfo.ingredients[i].ammount + 'ml</div><div class="DM_ing_name">' + drinkinfo.ingredients[i].name + '</div></div>';
         }
@@ -250,52 +250,79 @@ console.log(DM_status);
 }
 
 
+
 //Funcion para registrar el consumo de las bebidas
 function sabor(a,b,c){
-    var beb1,init1,beb2,init2,beb3,init3,beb4,init4,beb5,init5;
+    var beb1,init1,b1,beb2,init2,b2,beb3,init3,b3,beb4,init4,b4,beb5,init5,b5;
     for (i=0;i<=c;i++){    
         switch(a[i]){
             case "Cola":
                 beb1=b[i];
-                b1=b1+beb1;
-                init1=localStorage.getItem("beb1");
+                if(localStorage.getItem("Vol. Beb1")==localStorage.getItem("Vol_I. Beb1")){
+                    b1=beb1;
+                }else{
+                    b1=localStorage.getItem("ConsumoBeb1");
+                    b1=parseFloat(b1)+parseFloat(beb1);
+                }
+                init1=localStorage.getItem("Vol. Beb1");
                 init1=init1-beb1;
-                localStorage.setItem("beb1",init1);
+                localStorage.setItem("Vol. Beb1",init1);
                 localStorage.setItem("ConsumoBeb1",b1);
             break;
             case "Club-Mate":
                 beb2=b[i];
-                b2=b2+beb2;
-                init2=localStorage.getItem("beb2");
+                if(localStorage.getItem("Vol. Beb2")==localStorage.getItem("Vol_I. Beb2")){
+                    b2=beb2;
+                }else{
+                    b2=localStorage.getItem("ConsumoBeb2");
+                    b2=parseFloat(b2)+parseFloat(beb2);
+                }
+                init2=localStorage.getItem("Vol. Beb2");
                 init2=init2-beb2;
-                localStorage.setItem("beb2",init2);
-                localStorage.setItem("ConsumoBeb2",beb2);
+                localStorage.setItem("Vol. Beb2",init2);
+                localStorage.setItem("ConsumoBeb2",b2);
             break;
             case "Rum":
                 beb3=b[i];
-                b3=b3+beb3;
-                init3=localStorage.getItem("beb3");
+                if(localStorage.getItem("Vol. Beb3")==localStorage.getItem("Vol_I. Beb3")){
+                    b3=beb3;
+                }else{
+                    b3=localStorage.getItem("ConsumoBeb3");
+                    b3=parseFloat(b3)+parseFloat(beb3);
+                }
+                init3=localStorage.getItem("Vol. Beb3");
                 init3=init3-beb3;
-                localStorage.setItem("beb3",init3);
-                localStorage.setItem("ConsumoBeb3",beb3);
+                localStorage.setItem("Vol. Beb3",init3);
+                localStorage.setItem("ConsumoBeb3",b3);
+            break;
+            case "Moscow-Mule":
+                beb4=b[i];
+                if(localStorage.getItem("Vol. Beb4")==localStorage.getItem("Vol_I. Beb4")){
+                    b4=beb4;
+                }else{
+                    b4=localStorage.getItem("ConsumoBeb4");
+                    b4=parseFloat(b4)+parseFloat(beb4);
+                }
+                init4=localStorage.getItem("Vol. Beb4");
+                init4=init4-beb4;
+                localStorage.setItem("Vol. Beb4",init4);
+                localStorage.setItem("ConsumoBeb4",b4);
             break;
             case "Wasser":
-                beb4=b[i];
-                b4=b4+beb4;
-                init4=localStorage.getItem("beb4");
-                init4=init4-beb4;
-                localStorage.setItem("beb4",init4);
-                localStorage.setItem("ConsumoBeb4",beb4);
-            break;
-            case "O-saft":
                 beb5=b[i];
-                b5=b5+beb5;
-                init5=localStorage.getItem("beb5");
+                if(localStorage.getItem("Vol. Beb5")==localStorage.getItem("Vol_I. Beb5")){
+                    b5=beb5;
+                }else{
+                    b5=localStorage.getItem("ConsumoBeb5");
+                    b5=parseFloat(b5)+parseFloat(beb5);
+                }
+                init5=localStorage.getItem("Vol. Beb5");
                 init5=init5-beb5;
-                localStorage.setItem("beb5",init5);
-                localStorage.setItem("ConsumoBeb5",beb5);
+                localStorage.setItem("Vol. Beb5",init5);
+                localStorage.setItem("ConsumoBeb5",b5);
             break;
             default:
+            break;
         }
     }
 }
@@ -343,7 +370,6 @@ function doseDrink(id,json) {
     var long= control.length;
     var nombres = getFields(control,"name");
     var cantidad = getFields(control,"ammount");
-    sabor(nombres,cantidad,long);
     if (DM_status === DM_State.RUNNING) {
         if (testing) {
             MM_status = MM_State.FIXED;
@@ -371,9 +397,10 @@ function doseDrink(id,json) {
             publish(TopicDose, id.toString());
             document.getElementById("DM_zubereiten_loading").className = "";
             document.getElementById("DM_zubereiten").className = "DM_button loader_active";
-    setTimeout(function(){doseStart("abc");}, 1000);
+            setTimeout(function(){doseStart("abc");}, 1000);
         }
     }
+    sabor(nombres,cantidad,long);
 }
 
 function doseStart(id) {
@@ -388,6 +415,11 @@ function doseStart(id) {
             document.getElementById("DM_zubereiten_loading").className = "inv";
     }, 500)}
    // setTimeout(function(){doseEnded();}, 45000);
+}
+
+function abrir(){
+    publish(TopicOpenAllValves, '11');
+    console.log("Abriendo");
 }
 
 function updateDosingState(update) {
@@ -425,7 +457,7 @@ function keydown(e) {
 
 //Funcion para abir la nueva pagina de bebidas
 function bebidas(){
-    location.href="/home/pi/Hector9000WebUI/BebidasUI/drinks.html";
+    location.href="/home/pi/Hector9000WebUI/drinks.html";
 }
 //////////////////////////////
 
@@ -522,11 +554,12 @@ console.log("payload: " + msg.payloadString);
         DoseStartSubscriber(msg.payloadString);
     } else if (topic === TopicDose + "/progress") {
         DrinkProcessSubscriber(msg.payloadString);
-    }
+    } 
 }
 
 function onConnect() {
     mqtt.subscribe(TopicDrinkList + "/return");
+    mqtt.subscribe(TopicOpenAllValves);
     mqtt.subscribe(TopicIngredients + "/return");
     mqtt.subscribe(TopicDose + "/progress");
     mqtt.subscribe(TopicDose + "/return");

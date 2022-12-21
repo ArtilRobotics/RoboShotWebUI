@@ -682,9 +682,9 @@
     </div>
   </div>
 </div>
-
 <div class="MC_cls" id="modalclose" onclick="closeEitherModal()"></div>
 </div>
+
 <script type='module'>
 
   //Ingreso de datos mediante el pad
@@ -810,30 +810,38 @@
   //Insertar DATA
 
   async function InsertData(id){
+      //Fecha
+      let hoy= new Date();
+      let dia=hoy.getDate();
+      let mes = hoy.getMonth()+1;
+      let year = hoy.getFullYear();
+
+      let formato1=`${year}-${mes}-${dia}`;
+
     var bebida=0;
     switch(id){
       case 1:
-         bebida=localStorage.getItem("beb1");
+         bebida=localStorage.getItem("Vol_I. Beb1");
       break;
       case 2:
-         bebida=localStorage.getItem("beb2");
+         bebida=localStorage.getItem("Vol_I. Beb2");
       break;
       case 3:
-         bebida=localStorage.getItem("beb3");
+         bebida=localStorage.getItem("Vol_I. Beb3");
       break;
       case 4:
-         bebida=localStorage.getItem("beb4");
+         bebida=localStorage.getItem("Vol_I. Beb4");
       break;
       case 5:
-         bebida=localStorage.getItem("beb5");
+         bebida=localStorage.getItem("Vol_I. Beb5");
       break;
       case 6:
-         bebida=localStorage.getItem("beb6");
+         bebida=localStorage.getItem("Vol_I. Beb6");
       break;
       default:
       break;
     }
-    var ref= doc(db,"Volumen inicial de las bebidas","Bebida"+id);
+    var ref= doc(db,"Volumen inicial de las bebidas"+formato1,"Bebida"+id);
     const docRef = await setDoc(
       ref,{
         Cantidad_en_ml:bebida,

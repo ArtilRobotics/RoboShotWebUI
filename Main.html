@@ -5,7 +5,6 @@
 
     <title>ROBOSHOT</title>
     <script src="js/mqtt.js"></script>
-    <script src="js/registro.js"></script>
     <script src="js/hector9000.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="css/fontawesome/fontawesome.css" rel="stylesheet" type="text/css"/>
@@ -112,10 +111,7 @@
                     <span 
                         style="padding-right: 10px;"><span id="h11">Volver</a></span>
                 </div>
-                <div class="CM_button2" id="Button12Liz">
-                    <span>ACEPTAR</span>
-                  </div>
-                <div class="DM_button" id="DM_zubereiten" onclick=" ">
+                <div class="DM_button" id="DM_zubereiten" onclick="module.InsertData23()">
                     <div id="DM_zubereiten_inner">
                         <i class="fas fa-cocktail" style="margin-top: auto; margin-bottom: auto;"></i>
                         <span
@@ -147,8 +143,8 @@
                     </div>
                 </div>
                 <div id="CM_buttons2">
-                    <div class="CM_button" onclick="publish(TopicClean, 'true')">
-                        <span id="h9">LIMPIAR</span>
+                    <div class="CM_button" onclick="abrir()">
+                        <span id="h9">ABRIR</span>
                     </div>
                     <div class="CM_button" onclick="bebidas()">
                         <span id="h9">BEBIDAS</span>
@@ -170,8 +166,11 @@
 <div>
     <div class="MC_cls" id="modalclose" onclick="closeEitherModal()"></div>
 </div>
-<script type="module"> 
-                        
+<script type="text/javascript">
+    const module = {};
+  </script>
+  <script type="module">
+
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
     // TODO: Add SDKs for Firebase products that you want to use
@@ -195,39 +194,40 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-
     const analytics = getAnalytics(app);
 
+    async function InsertData23(){ 
+         //Fecha
+      let hoy= new Date();
+      let dia=hoy.getDate();
+      let mes = hoy.getMonth()+1;
+      let year = hoy.getFullYear();
 
-    const button12Liz = document.getElementById("Button12Liz");
-    console.log(button12Liz);
-    console.log("Aqui");
-    if(button12Liz){
-        button12Liz.addEventListener("click",function(e){ 
-        alert("Registrado1");});
-        InsertData23();
-    }
-    function InsertData23(){ 
-        console.log("Registrado2");  
-        // let bebida=0;
-        // var ref= doc(db,"Consumo de las bebidas","Cantidad en ml");
-        // const docRef = await setDoc(
-        // ref,{
-        // Cantidad_en_ml:bebida,
-        // }
-        // )
-        // .catch((error)=>{    
-        // alert("Unsuccesful operation,error:"+error);
-        // });
-    }
-    //button12Liz.addEventListener('click',InsertData2);
-    console.log("Aqui 2");
-    console.log(button12Liz);
+      let formato1=`${year}-${mes}-${dia}`;
+      console.log("Registrado2");  
+      let bebida1=localStorage.getItem("ConsumoBeb1");
+      let bebida2=localStorage.getItem("ConsumoBeb2");
+      let bebida3=localStorage.getItem("ConsumoBeb3");
+      let bebida4=localStorage.getItem("ConsumoBeb4");
+      let bebida5=localStorage.getItem("ConsumoBeb5");
+      var ref= doc(db,"Consumo de las bebidas"+formato1,"Consumo en ml:");
+      const docRef = await setDoc(
+      ref,{
+      Consumo_beb1:bebida1,
+      Consumo_beb2:bebida2,
+      Consumo_beb3:bebida3,
+      Consumo_beb4:bebida4,
+      Consumo_beb5:bebida5,
+      }
+      )
+      .catch((error)=>{    
+      alert("Unsuccesful operation,error:"+error);
+      });
+  }
 
-    document.getElementById("Button12Liz").addEventListener("click",function(e){ 
-        alert("Registrado");});
-    console.log("Aqui 3");
-    </script>
+    module.InsertData23 = InsertData23;
+  </script>
+
 </body>
 
 </html>
