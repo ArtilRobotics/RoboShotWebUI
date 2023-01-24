@@ -226,7 +226,7 @@ dmypy.json
 *.csr
 
 *.htm
-*.html
+
 
 *.jsp
 *.php

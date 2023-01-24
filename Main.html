@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
 
@@ -111,7 +110,7 @@
                     <span 
                         style="padding-right: 10px;"><span id="h11">Volver</a></span>
                 </div>
-                <div class="DM_button" id="DM_zubereiten" onclick="module.InsertData23()">
+                <div class="DM_button" id="DM_zubereiten" onclick=" ">
                     <div id="DM_zubereiten_inner">
                         <i class="fas fa-cocktail" style="margin-top: auto; margin-bottom: auto;"></i>
                         <span
@@ -141,16 +140,27 @@
                     <div class="CM_button" onclick="location.reload()">
                         <span id="h9">RECARGAR</span>
                     </div>
+                    <div class="CM_button" onclick=" ">
+                        <span id="h9">INF. BEBIDAS</span>
+                    </div>
                 </div>
                 <div id="CM_buttons2">
                     <div class="CM_button" onclick="abrir()">
-                        <span id="h9">ABRIR</span>
+                        <span id="h9">ABRIR SERVOS</span>
                     </div>
-                    <div class="CM_button" onclick="bebidas()">
-                        <span id="h9">BEBIDAS</span>
+                    <div class="CM_button" onclick="cerrar()">
+                        <span id="h9">CERRAR SERVOS</span>
                     </div>
                 </div>
                 <div id="CM_buttons3">
+                    <div class="CM_button" onclick="bebidas()">
+                        <span id="h9">INF. CANTIDAD</span>
+                    </div>
+                    <div class="CM_button" onclick="limpiar()">
+                        <span id="h9">LIMPIAR</span>
+                    </div>
+                </div>
+                <div id="CM_buttons4">
                     <div class="CM_button" id="Register" onclick="closeConfigModal()">
                         <span id="h9">SALIR</span>
                     </div>
@@ -168,8 +178,8 @@
 </div>
 <script type="text/javascript">
     const module = {};
-  </script>
-  <script type="module">
+</script>
+<script type="module">
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
@@ -195,21 +205,36 @@
     const db = getFirestore(app);
 
     const analytics = getAnalytics(app);
+    
+    //Fecha
+    let hoy = new Date();
+    let dia = hoy.getDate();
+    let mes = hoy.getMonth()+1;
+    let year = hoy.getFullYear();
+    let hour = hoy.getHours();
+    let minute = hoy.getMinutes();
+    let seconds = hoy.getSeconds();
+    
+    let formato1=`${year}-${mes}-${dia}`;
+
+
+    if(hour==0){
+        localStorage.setItem("ConsumoBeb1",0);
+        localStorage.setItem("ConsumoBeb2",0);
+        localStorage.setItem("ConsumoBeb3",0);
+        localStorage.setItem("ConsumoBeb4",0);
+        localStorage.setItem("ConsumoBeb5",0);
+    }
 
     async function InsertData23(){ 
-         //Fecha
-      let hoy= new Date();
-      let dia=hoy.getDate();
-      let mes = hoy.getMonth()+1;
-      let year = hoy.getFullYear();
-
-      let formato1=`${year}-${mes}-${dia}`;
-      console.log("Registrado2");  
+      console.log("Registrado");
       let bebida1=localStorage.getItem("ConsumoBeb1");
       let bebida2=localStorage.getItem("ConsumoBeb2");
       let bebida3=localStorage.getItem("ConsumoBeb3");
       let bebida4=localStorage.getItem("ConsumoBeb4");
       let bebida5=localStorage.getItem("ConsumoBeb5");
+
+
       var ref= doc(db,"Consumo de las bebidas"+formato1,"Consumo en ml:");
       const docRef = await setDoc(
       ref,{
@@ -223,9 +248,10 @@
       .catch((error)=>{    
       alert("Unsuccesful operation,error:"+error);
       });
-  }
+    }
 
-    module.InsertData23 = InsertData23;
+    window.InsertData23=InsertData23;
+    // module.InsertData23 = InsertData23;
   </script>
 
 </body>

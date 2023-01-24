@@ -15,7 +15,7 @@
   
   <div id="header">
       <div id="title">
-          <span id="h10">ROBOSHOT 2</span>
+          <span id="h10">ROBOSHOT</span>
       </div>
       <div id="logo">
           <img src="https://artilrobotics.com/wp-content/uploads/2021/10/Artil-Imagotipo-para-Fondos-Oscuros-min.png"alt="Artil Robotics" width="100" height="">
@@ -419,7 +419,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(7)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb7()">
+               <div class="CM_button2" id="Button7" onclick="beb7()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -469,7 +469,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(8)">
                   <span> SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb8()">
+               <div class="CM_button2" id="Button8" onclick="beb8()">
                 <span> ACEPTAR</span>
               </div>
             </div>
@@ -519,7 +519,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(9)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb9()">
+               <div class="CM_button2" id="Button9" onclick="beb9()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -569,7 +569,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(10)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb10()">
+               <div class="CM_button2" id="Button10" onclick="beb10()">
                 <span id>ACEPTAR</span>
               </div>
             </div>
@@ -619,7 +619,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(11)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb11()">
+               <div class="CM_button2" id="Button11" onclick="beb11()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -669,7 +669,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(12)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" onclick="beb12()">
+               <div class="CM_button2" id="Button12" onclick="beb12()">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -764,13 +764,13 @@
           back(10);  
         break;
         case "c11":
-          document.getElementById("Beb10").value+=val.innerText;
+          document.getElementById("Beb11").value+=val.innerText;
         break;
         case "d11":
           back(11);  
         break;
         case "c12":
-          document.getElementById("Beb10").value+=val.innerText;
+          document.getElementById("Beb12").value+=val.innerText;
         break;
         case "d12":
           back(12);  
@@ -837,6 +837,26 @@
       break;
       case 6:
          bebida=localStorage.getItem("Vol_I. Beb6");
+         console.log("Estoy en el 6");
+      break;
+      case 7:
+         bebida=localStorage.getItem("Vol_I. Beb7");
+         console.log("Estoy en el 7");
+      break;
+      case 8:
+         bebida=localStorage.getItem("Vol_I. Beb8");
+      break;
+      case 9:
+         bebida=localStorage.getItem("Vol_I. Beb9");
+      break;
+      case 10:
+         bebida=localStorage.getItem("Vol_I. Beb10");
+      break;
+      case 11:
+         bebida=localStorage.getItem("Vol_I. Beb11");
+      break;
+      case 12:
+         bebida=localStorage.getItem("Vol_I. Beb12");
       break;
       default:
       break;
@@ -859,6 +879,12 @@
   Button4.addEventListener("click",() => InsertData(4));
   Button5.addEventListener("click",() => InsertData(5));
   Button6.addEventListener("click",() => InsertData(6));
+  Button7.addEventListener("click",() => InsertData(7));
+  Button8.addEventListener("click",() => InsertData(8));
+  Button9.addEventListener("click",() => InsertData(9));
+  Button10.addEventListener("click",() => InsertData(10));
+  Button11.addEventListener("click",() => InsertData(11));
+  Button12.addEventListener("click",() => InsertData(12));
 </script>
 
 </body>
