@@ -93,66 +93,18 @@ function back(){
     location.href = "/home/pi/Hector9000WebUI/Main.html";
 }
 
+var Beb= new Array();
+var Ingredients = new Array();
+
+
 //Funciones para almacenar 
-function beb1(){
-    var beb1= document.getElementById("Beb1").value;
-    localStorage.setItem("Vol. Beb1",beb1);
-    localStorage.setItem("Vol_I. Beb1",beb1);
-}
-function beb2(){
-    var beb2= document.getElementById("Beb2").value;
-    localStorage.setItem("Vol. Beb2",beb2);
-    localStorage.setItem("Vol_I. Beb2",beb2);
-}
-function beb3(){
-    var beb3= document.getElementById("Beb3").value;
-    localStorage.setItem("Vol. Beb3",beb3);
-    localStorage.setItem("Vol_I. Beb3",beb3);
-}
-function beb4(){
-    var beb4= document.getElementById("Beb4").value;
-    localStorage.setItem("Vol. Beb4",beb4);
-    localStorage.setItem("Vol_I. Beb4",beb4);
-}
-function beb5(){
-    var beb5= document.getElementById("Beb5").value;
-    localStorage.setItem("Vol. Beb5",beb5);
-    localStorage.setItem("Vol_I. Beb5",beb5);
-}
-function beb6(){
-    var beb6= document.getElementById("Beb6").value;
-    localStorage.setItem("Vol. Beb6",beb6);
-    localStorage.setItem("Vol_I. Beb6",beb6);
-}
-function beb7(){
-    var beb7= document.getElementById("Beb7").value;
-    localStorage.setItem("Vol. Beb7",beb7);
-    localStorage.setItem("Vol_I. Beb7",beb7);
-}
-function beb8(){
-    var beb8= document.getElementById("Beb8").value;
-    localStorage.setItem("Vol. Beb8",beb8);
-    localStorage.setItem("Vol_I. Beb8",beb8);
-}
-function beb9(){
-    var beb9= document.getElementById("Beb9").value;
-    localStorage.setItem("Vol. Beb9",beb9);
-    localStorage.setItem("Vol_I. Beb9",beb9);
-}
-function beb10(){
-    var beb10= document.getElementById("Beb10").value;
-    localStorage.setItem("Vol. Beb10",beb10);
-    localStorage.setItem("Vol_I. Beb10",beb10);
-}
-function beb11(){
-    var beb11= document.getElementById("Beb11").value;
-    localStorage.setItem("Vol. Beb11",beb11);
-    localStorage.setItem("Vol_I. Beb11",beb11);
-}
-function beb12(){
-    var beb12= document.getElementById("Beb12").value;
-    localStorage.setItem("Vol. Beb12",beb12);
-    localStorage.setItem("Vol_I. Beb12",beb12);
+function beb(id){
+    for (let i=1; i<=12; i++){
+        Ingredients[i]= localStorage.getItem("Nombres"+i);
+    }
+    Beb[id]= document.getElementById("Beb"+id).value;
+    localStorage.setItem("Vol. Beb_"+ id + "_"+Ingredients[id]+":", Beb[id]);
+    localStorage.setItem("Vol_I. Beb" + id + Ingredients[id] + ":", Beb[id]);
 }
 
 ////////////////////////////////////////////////////////////

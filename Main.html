@@ -110,7 +110,7 @@
                     <span 
                         style="padding-right: 10px;"><span id="h11">Volver</a></span>
                 </div>
-                <div class="DM_button" id="DM_zubereiten" onclick=" ">
+                <div class="DM_button" id="DM_zubereiten" onclick="InsertData23()">
                     <div id="DM_zubereiten_inner">
                         <i class="fas fa-cocktail" style="margin-top: auto; margin-bottom: auto;"></i>
                         <span
@@ -217,32 +217,32 @@
     
     let formato1=`${year}-${mes}-${dia}`;
 
+    var Ingredients = new Array();
+    var bebida = new Array();
+    for (let i=1; i<=12; i++){
+            Ingredients[i]= localStorage.getItem("Nombres"+i);
+    }
 
     if(hour==0){
-        localStorage.setItem("ConsumoBeb1",0);
-        localStorage.setItem("ConsumoBeb2",0);
-        localStorage.setItem("ConsumoBeb3",0);
-        localStorage.setItem("ConsumoBeb4",0);
-        localStorage.setItem("ConsumoBeb5",0);
+        for (let i=1; i<=12; i++){
+            localStorage.setItem("Consumo_Beb"+i+"_"+Ingredients[i]+":",0);
+        }
     }
 
     async function InsertData23(){ 
-      console.log("Registrado");
-      let bebida1=localStorage.getItem("ConsumoBeb1");
-      let bebida2=localStorage.getItem("ConsumoBeb2");
-      let bebida3=localStorage.getItem("ConsumoBeb3");
-      let bebida4=localStorage.getItem("ConsumoBeb4");
-      let bebida5=localStorage.getItem("ConsumoBeb5");
+        for (let i=1; i<=12; i++){
+            bebida[i]=localStorage.getItem("Consumo_Beb"+i+"_"+Ingredients[i]+":");
+        }
 
 
-      var ref= doc(db,"Consumo de las bebidas"+formato1,"Consumo en ml:");
+      var ref= doc(db,"Consumo de las bebidas: "+formato1,"Consumo en ml:");
       const docRef = await setDoc(
       ref,{
-      Consumo_beb1:bebida1,
-      Consumo_beb2:bebida2,
-      Consumo_beb3:bebida3,
-      Consumo_beb4:bebida4,
-      Consumo_beb5:bebida5,
+      Consumo_beb1:bebida[1],
+      Consumo_beb2:bebida[2],
+      Consumo_beb3:bebida[3],
+      Consumo_beb4:bebida[4],
+      Consumo_beb5:bebida[5],
       }
       )
       .catch((error)=>{    

@@ -1,4 +1,3 @@
-
 const DM_State = {
     'CLOSED': 0,
     'OPENING': 1,
@@ -19,15 +18,24 @@ const MM_State = {
 
 
 var started = false;
+var alarm = true;
 var DM_status = DM_State.CLOSED;
 var MM_status = MM_State.CLOSED;
 
 var displays = [];
+var Ingredientes = new Array( );
 var displaystate = 0;
 var mqtt;
 
-var nombre;
+var valor;
 var long;
+var nombre = new Array();
+var aux1 = new Array();
+var aux2 = new Array();
+var aux3 = new Array();
+var aux4 = new Array();
+var aux5 =  new Array();
+var alarma = true;
 
 const host = "localhost";
 const port = 9001;
@@ -44,7 +52,7 @@ const TopicCloseAllValves = "Hector9000/closeAllValves";
 
 //--------- Testing start ---------------
 
-const testing = false;
+const testing = true;
 
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
@@ -57,8 +65,17 @@ var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     ']' +
     '}';
 
+var drinkjson2 = '{ "id": "1", "name": "Getränk","color": "#999999",' +
+    '"description": "Ein Getränk",' +
+    '"ingredients": [' +
+    '{"name": "Limon", "ammount": 150},' +
+    '{"name": "Wasser", "ammount": 50},' +
+    '{"name": "Rum", "ammount": 200},' +
+    '{"name": "Cola", "ammount": 10}' +
+    ']' +
+    '}';
 
-var jsont = '{"drinks": [{"name": "Piña colada","id": 123, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
+var jsont = '{"drinks": [{"name": "Piña colada","id": 1, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de fresa","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Margarita frozen de limón","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Pisco Sunrise","id": 123, "alcohol": false,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Cosmopolitan","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Mojito","id": 123, "alcohol": true,"image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"},{"name": "Piña colada","id": 123, "alcohol": true, "image":"https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/DJNTLM5KOJFCTB4VGVDENLJUSA.jpg"}]}';
 
 //--------- Testing end ---------------
 
@@ -127,15 +144,12 @@ function generateButtons(drinksjson) {
 
 function generateIngredients(ingredientsJSON){
     var json=JSON.parse(ingredientsJSON);
-    var longs=json.ingredients.length;
     var nombres=json.ingredients;
-    nombre=nombres;
-    long=longs;
+    long=nombres.length;
+    for (let i = 0; i < long; i++) {
+        localStorage.setItem("Nombres"+(i+1),nombres[i].name);
+    }
 }
-
-
-
-console.log(nombres);
 
 function startup() {
     if (testing) {
@@ -147,6 +161,14 @@ function startup() {
     }
 }
 
+function startup2() {
+    if (testing) {
+        started = true;
+        generateIngredients(drinkjson);
+    } else {
+        setUpMQTT();
+    }
+}
 // Mainmodal
 function openModal() {
     if (MM_status === MM_State.CLOSED) {
@@ -225,7 +247,7 @@ function openDrinkModal(drinkinfo) {
         document.getElementById("mod-drink").setAttribute("d_id", drinkinfo.getAttribute("d_id"));
         if (testing) {
             DM_status = DM_State.LOADING;
-            setTimeout(showIngredientsAndButton(drinkjson), 800);
+            setTimeout(showIngredientsAndButton(drinkjson2), 800);
         } else {
             DM_status = DM_State.LOADING;
             publish(TopicIngredients, drinkinfo.getAttribute("d_id"));
@@ -241,113 +263,194 @@ function getFields(input, field) {
     return output;
 }
 
+var beb_equal= new Array();
+var beb2_equal= new Array();
+var beb_pos = new Array();
+var beb2_pos = new Array();
+var iguales=0;
+var b=0;
+var c=0;
 //Indica los ingredientes 
 function showIngredientsAndButton(json) {
     let drinkinfo = JSON.parse(json);
+    let drinkinfo_ingredients=drinkinfo.ingredients;
+    let bebidas_long=drinkinfo.ingredients.length;
     console.log(document.getElementById("mod-drink"));
+    //Encuentro los nombres y la cantidad de todos los ingredientes ingresados en el database
+    for( let i=0 ; i < long; i ++){
+        Ingredientes[i]=localStorage.getItem("Nombres"+ (i+1));
+        aux3[i]=parseInt(localStorage.getItem("Vol_I. Beb"+ (i+1) + Ingredientes[i]+":"));
+    }
+    
+    console.log(Ingredientes);
+    //Encuentro los nombres y la cantidad de los ingredientes de la receta
+    for( let a=0 ; a < bebidas_long; a++){
+        aux1[a]=drinkinfo_ingredients[a].name;
+        aux2[a]=drinkinfo.ingredients[a].ammount;
+    }
+
+    console.log(aux1);
+
+    //Defino mi while para la alarma, si encuentra uno que este mal sale.
+    while(alarm){
+        //Busco en la lista de la receta el primero que sea igual a uno que se encuentre en la lista de los ingredientes en general
+        while( b < bebidas_long ){
+            beb_equal[b]=Ingredientes.find(element => element == aux1[b]);
+            b++;
+        }
+        console.log(beb_equal);
+        //Busco las posiciones de esos ingredientes en la receta
+        for (let i=0; i < b; i++){
+            beb_pos[i]=aux1.findIndex(element => element == beb_equal[i])
+        }
+        //Hago un filtrado de solo tener posiciones mayores o iguales a 0, porque a veces tengo indefinidos en beb_pos
+        const filtradoDeNumeros2 = beb_pos.filter((element)=> element >= 0 );
+        console.log(filtradoDeNumeros2);
+        //Obtengo la cantidad de los ingredientes que deseo de la receta
+        let aux6;
+        let aux7 = new Array();
+        for (let i=0; i < filtradoDeNumeros2.length; i++){
+            aux6=filtradoDeNumeros2[i];
+            aux7[i]=aux2[aux6];
+        }
+        console.log(aux7);
+        //Busco en la lista de los ingredientes en general el ingrediente que se repite, para obtener la posicion y la cantidad que hay en ese momento
+        while(c < long){
+            beb2_equal[c]=Ingredientes.find(element => element == beb_equal[c])
+            c++;
+        }
+        console.log(beb2_equal);
+        //Busco la posicion de esos ingredientes en la lista de ingredientes general
+        for (let i=0; i < c; i++){
+            beb2_pos[i]=Ingredientes.findIndex(element => element == beb2_equal[i])
+        }
+        //Hago un filtrado
+        const filtradoDeNumeros3 = beb2_pos.filter((element)=> element >= 0 );
+        console.log(filtradoDeNumeros3);
+        //Obtengo la cantidad de los ingredientes que deseo de la receta
+        let aux8;
+        let aux9 = new Array();
+        for (let i=0; i < filtradoDeNumeros3.length; i++){
+            aux8=filtradoDeNumeros3[i];
+            aux9[i]=aux3[aux8];
+        }
+        console.log(aux9);
+        
+        for( let i=0; i< aux7.length; i++){
+            if(aux7[i]>aux9[i]){
+                iguales = 1;
+                break;
+            }
+        }
+        break;
+    }
+    console.log(b);
     if (drinkinfo.id != document.getElementById("mod-drink").getAttribute("d_id")) {
         console.log("not doing stuff");
         return;
     }
     if (DM_status === DM_State.LOADING) {
-        console.log("doing stuff");
-        document.getElementById("DM_ing_loader").className = "inv";
-        document.getElementById("DM_zubereiten").disabled = false;
-        document.getElementById("DM_zubereiten").addEventListener("click", function () {
-            doseDrink(drinkinfo);
-        });
-        for (let i = 0; i < drinkinfo.ingredients.length; i++) {
-            document.getElementById("DM_List").innerHTML += '<div class="DM_ing"><div class="DM_ing_amm">' + drinkinfo.ingredients[i].ammount + 'ml</div><div class="DM_ing_name">' + drinkinfo.ingredients[i].name + '</div></div>';
+        if(iguales == 0){
+            console.log("esta normal");
+            console.log("doing stuff");
+            document.getElementById("DM_ing_loader").className = "inv";
+            document.getElementById("DM_zubereiten").disabled = false;
+            document.getElementById("DM_zubereiten").addEventListener("click", function () {
+                doseDrink(drinkinfo);
+            });
+            for (let i = 0; i < drinkinfo.ingredients.length; i++) {
+                document.getElementById("DM_List").innerHTML += '<div class="DM_ing"><div class="DM_ing_amm">' + drinkinfo.ingredients[i].ammount + 'ml</div><div class="DM_ing_name">' + drinkinfo.ingredients[i].name + '</div></div>';
+            }
+        }else if(iguales == 1){
+            console.log("es menor");
+            document.getElementById("DM_List").innerHTML += '<div class="DM_ing_amm">'+'No se puede preparar la bebida</div>';
         }
         DM_status = DM_State.RUNNING;
     }
-    console.log(DM_status);
 }
 
 
 
 //Funcion para registrar el consumo de las bebidas
 function sabor(a,c) {
+    for (let i = 0; i < long; i++){
+        nombre[i]=localStorage.getItem("Nombres"+(i+1));
+    }
     var nombres=getFields(a,"name");
     var b=getFields(a,"ammount");
     var beb1, init1, b1, beb2, init2, b2, beb3, init3, b3, beb4, init4, b4, beb5, init5, b5;
     for (i = 0; i < c; i++) {
         switch (nombres[i]) {
-            case nombres[0]:
+            case nombre[0]:
                 beb1 = b[i];
-                if (localStorage.getItem("Vol. Beb1") == localStorage.getItem("Vol_I. Beb1")) {
+                if (localStorage.getItem("Vol. Beb_1_"+ nombre[0]+":") == localStorage.getItem("Vol_I. Beb1" + nombre[0] + ":")) {
                     b1 = beb1;
                 } else {
-                    b1 = localStorage.getItem("ConsumoBeb1");
+                    b1 = localStorage.getItem("Consumo_Beb_1" + nombre[0]+":");
                     b1 = parseFloat(b1) + parseFloat(beb1);
                 }
-                init1 = localStorage.getItem("Vol. Beb1");
+                init1 = localStorage.getItem("Vol. Beb_1_" + nombre[0]+":");
                 init1 = init1 - beb1;
-                localStorage.setItem("Vol. Beb1", init1);
-                localStorage.setItem("ConsumoBeb1", b1);
+                localStorage.setItem("Vol. Beb_1_"+ nombre[0]+":", init1);
+                localStorage.setItem("Consumo_Beb_1" + nombre[0]+":", b1);
                 break;
-            case nombres[1]:
+            case nombre[1]:
                 beb2 = b[i];
                 console.log(beb2);
-                if (localStorage.getItem("Vol. Beb2") == localStorage.getItem("Vol_I. Beb2")) {
+                if (localStorage.getItem("Vol. Beb_2_"+ nombre[1]+":") == localStorage.getItem("Vol_I. Beb2" + nombre[1] + ":")) {
                     b2 = beb2;
                 } else {
-                    b2 = localStorage.getItem("ConsumoBeb2");
+                    b2 = localStorage.getItem("Consumo_Beb_2"+ nombre[1]+":");
                     b2 = parseFloat(b2) + parseFloat(beb2);
                 }
-                init2 = localStorage.getItem("Vol. Beb2");
+                init2 = localStorage.getItem("Vol. Beb_2_"+ nombre[1]+":");
                 init2 = init2 - beb2;
-                localStorage.setItem("Vol. Beb2", init2);
-                localStorage.setItem("ConsumoBeb2", b2);
+                localStorage.setItem("Vol. Beb_2_"+ nombre[1]+":", init2);
+                localStorage.setItem("Consumo_Beb_2" + nombre[1]+":", b2);
                 break;
-            case nombres[2]:
+            case nombre[2]:
                 beb3 = b[i];
-                if (localStorage.getItem("Vol. Beb3") == localStorage.getItem("Vol_I. Beb3")) {
+                if (localStorage.getItem("Vol. Beb_3_"+ nombre[2]+":") == localStorage.getItem("Vol_I. Beb3" + nombre[2] + ":")) {
                     b3 = beb3;
                 } else {
-                    b3 = localStorage.getItem("ConsumoBeb3");
+                    b3 = localStorage.getItem("Consumo_Beb_3"+ nombre[2]+":");
                     b3 = parseFloat(b3) + parseFloat(beb3);
                 }
-                init3 = localStorage.getItem("Vol. Beb3");
+                init3 = localStorage.getItem("Vol. Beb_3_"+ nombre[2]+":");
                 init3 = init3 - beb3;
-                localStorage.setItem("Vol. Beb3", init3);
-                localStorage.setItem("ConsumoBeb3", b3);
+                localStorage.setItem("Vol. Beb_3_"+ nombre[2]+":", init3);
+                localStorage.setItem("Consumo_Beb_3" + nombre[2]+":", b3);
                 break;
-            case nombres[3]:
+            case nombre[3]:
                 beb4 = b[i];
-                if (localStorage.getItem("Vol. Beb4") == localStorage.getItem("Vol_I. Beb4")) {
+                if (localStorage.getItem("Vol. Beb_4_"+ nombre[3]+":") == localStorage.getItem("Vol_I. Beb4" + nombre[3] + ":")) {
                     b4 = beb4;
                 } else {
-                    b4 = localStorage.getItem("ConsumoBeb4");
+                    b4 = localStorage.getItem("Consumo_Beb_4" + nombre[3]+":");
                     b4 = parseFloat(b4) + parseFloat(beb4);
                 }
-                init4 = localStorage.getItem("Vol. Beb4");
+                init4 = localStorage.getItem("Vol. Beb_4_"+ nombre[3]+":");
                 init4 = init4 - beb4;
-                localStorage.setItem("Vol. Beb4", init4);
-                localStorage.setItem("ConsumoBeb4", b4);
+                localStorage.setItem("Vol. Beb_4_"+ nombre[3]+":", init4);
+                localStorage.setItem("Consumo_Beb_4" + nombre[3]+":", b4);
                 break;
-            case nombres[4]:
+            case nombre[4]:
                 beb5 = b[i];
-                if (localStorage.getItem("Vol. Beb5") == localStorage.getItem("Vol_I. Beb5")) {
+                if (localStorage.getItem("Vol. Beb_5_"+ nombre[4]+":") == localStorage.getItem("Vol_I. Beb5" + nombre[4] + ":")) {
                     b5 = beb5;
                 } else {
-                    b5 = localStorage.getItem("ConsumoBeb5");
+                    b5 = localStorage.getItem("Consumo_Beb_5" + nombre[4]+":");
                     b5 = parseFloat(b5) + parseFloat(beb5);
                 }
-                init5 = localStorage.getItem("Vol. Beb5");
+                init5 = localStorage.getItem("Vol. Beb_5_"+ nombre[4]+":");
                 init5 = init5 - beb5;
-                localStorage.setItem("Vol. Beb5", init5);
-                localStorage.setItem("ConsumoBeb5", b5);
+                localStorage.setItem("Vol. Beb_5_"+ nombre[4]+":", init5);
+                localStorage.setItem("Consumo_Beb_5" + nombre[4]+":", b5);
                 break;
             default:
                 break;
         }
     }
-}
-
-//Bebidas
-function bebidas() {
-    location.href = "/home/pi/Hector9000WebUI/drinks.html";
 }
 
 // Configmodal
@@ -385,15 +488,13 @@ function closeModalBack() {
 
 function doseDrink(info) {
     let id=info.id;
-    // let control = info.ingredients;
-    // var long = control.length;
-    // var nombres = getFields(control, "name");
-    // var cantidad = getFields(control, "ammount");
+    let nombres=info.ingredients;
+    let longitud=info.ingredients.length;
+    console.log(nombres);
     if (DM_status === DM_State.RUNNING) {
         if (testing) {
             MM_status = MM_State.FIXED;
             DM_status = DM_State.DOSING;
-            //alert("TESTING - DOSING DRINK");
             document.getElementById("DM_zubereiten_loading").className = "";
             document.getElementById("DM_zubereiten").className = "DM_button loader_active";
             setTimeout(function () {
@@ -419,8 +520,7 @@ function doseDrink(info) {
             setTimeout(function () {  }, 1000);
         }
     }
-    sabor(nombre,long);
- 
+    sabor(nombres,longitud);
 }
 
 function doseStart(id) {
@@ -500,20 +600,16 @@ function home(){
 
 //Funcion para ingresar a la pagina principal y setear las variables en cero
 function home1(){
-    location.href = "/home/pi/Hector9000WebUI/Main.html";
-    localStorage.setItem("ConsumoBeb1",0);
-    localStorage.setItem("ConsumoBeb2",0);
-    localStorage.setItem("ConsumoBeb3",0);
-    localStorage.setItem("ConsumoBeb4",0);
-    localStorage.setItem("ConsumoBeb5",0);
-    localStorage.setItem("ConsumoBeb6",0);
-    localStorage.setItem("ConsumoBeb7",0);
-    localStorage.setItem("ConsumoBeb8",0);
-    localStorage.setItem("ConsumoBeb9",0);
-    localStorage.setItem("ConsumoBeb10",0);
-    localStorage.setItem("ConsumoBeb11",0);
-    localStorage.setItem("ConsumoBeb12",0);
+    // location.href = "/home/pi/Hector9000WebUI/Main.html";
+    for(let i = 1; i <= long; i++){
+        Ingredientes[i]= localStorage.getItem("Nombres"+i);
+        localStorage.setItem("Consumo_Beb"+"_"+(i)+Ingredientes[i]+":",0);
+        localStorage.setItem("Vol_I. Beb"+i + Ingredientes[i]+":",0);
+        localStorage.setItem("Vol. Beb_"+ i + "_"+Ingredientes[i]+":", 0);
+    }
+    console.log("inicio");
 }
+
 
 function right() {
     if (MM_status === MM_State.RUNNING) {
@@ -552,7 +648,6 @@ function left() {
         }
     }
 }
-
 //MQTT
 
 //Funcion para obtener los ingredientes de cada una de las bebidas

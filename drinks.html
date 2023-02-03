@@ -119,7 +119,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(1)">
                   <span>SALIR</span>
                </div>
-                <div class="CM_button2" id="Button1" onclick="beb1()">
+                <div class="CM_button2" id="Button1" onclick="beb(1)">
                   <span>ACEPTAR</span>
                 </div>
             </div>
@@ -169,7 +169,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(2)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button2" onclick="beb2()">
+               <div class="CM_button2" id="Button2" onclick="beb(2)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -219,7 +219,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(3)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button3" onclick="beb3()">
+               <div class="CM_button2" id="Button3" onclick="beb(3)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -269,7 +269,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(4)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button4" onclick="beb4()">
+               <div class="CM_button2" id="Button4" onclick="beb(4)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -319,7 +319,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(5)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button5" onclick="beb5()">
+               <div class="CM_button2" id="Button5" onclick="beb(5)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -369,7 +369,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(6)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button6" onclick="beb6()">
+               <div class="CM_button2" id="Button6" onclick="beb(6)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -419,7 +419,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(7)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button7" onclick="beb7()">
+               <div class="CM_button2" id="Button7" onclick="beb(7)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -469,7 +469,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(8)">
                   <span> SALIR</span>
                </div>
-               <div class="CM_button2" id="Button8" onclick="beb8()">
+               <div class="CM_button2" id="Button8" onclick="beb(8)">
                 <span> ACEPTAR</span>
               </div>
             </div>
@@ -519,7 +519,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(9)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button9" onclick="beb9()">
+               <div class="CM_button2" id="Button9" onclick="beb(9)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -569,7 +569,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(10)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button10" onclick="beb10()">
+               <div class="CM_button2" id="Button10" onclick="beb(10)">
                 <span id>ACEPTAR</span>
               </div>
             </div>
@@ -619,7 +619,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(11)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button11" onclick="beb11()">
+               <div class="CM_button2" id="Button11" onclick="beb(11)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -809,6 +809,9 @@
   const analytics = getAnalytics(app);
   //Insertar DATA
 
+  var ingredients_drinks = new Array();
+  var Bebidas= new Array();
+  
   async function InsertData(id){
       //Fecha
       let hoy= new Date();
@@ -817,58 +820,27 @@
       let year = hoy.getFullYear();
 
       let formato1=`${year}-${mes}-${dia}`;
+      
 
-    var bebida=0;
-    switch(id){
-      case 1:
-         bebida=localStorage.getItem("Vol_I. Beb1");
-      break;
-      case 2:
-         bebida=localStorage.getItem("Vol_I. Beb2");
-      break;
-      case 3:
-         bebida=localStorage.getItem("Vol_I. Beb3");
-      break;
-      case 4:
-         bebida=localStorage.getItem("Vol_I. Beb4");
-      break;
-      case 5:
-         bebida=localStorage.getItem("Vol_I. Beb5");
-      break;
-      case 6:
-         bebida=localStorage.getItem("Vol_I. Beb6");
-         console.log("Estoy en el 6");
-      break;
-      case 7:
-         bebida=localStorage.getItem("Vol_I. Beb7");
-         console.log("Estoy en el 7");
-      break;
-      case 8:
-         bebida=localStorage.getItem("Vol_I. Beb8");
-      break;
-      case 9:
-         bebida=localStorage.getItem("Vol_I. Beb9");
-      break;
-      case 10:
-         bebida=localStorage.getItem("Vol_I. Beb10");
-      break;
-      case 11:
-         bebida=localStorage.getItem("Vol_I. Beb11");
-      break;
-      case 12:
-         bebida=localStorage.getItem("Vol_I. Beb12");
-      break;
-      default:
-      break;
+    for (let i=1; i<=12; i++){
+        ingredients_drinks[i]= localStorage.getItem("Nombres"+i);
+        console.log(ingredients_drinks[id]);
     }
-    var ref= doc(db,"Volumen inicial de las bebidas"+formato1,"Bebida"+id);
+
+
+    Bebidas[id]=(localStorage.getItem("Vol_I. Beb"+id + ingredients_drinks[id]+":"));
+    var ref= doc(db,"Volumen inicial de las bebidas: "+ formato1, "Volumen en ml:");
     const docRef = await setDoc(
       ref,{
-        Cantidad_en_ml:bebida,
+      Bebida_1:Bebidas[1],
+      Bebida_2:Bebidas[2],
+      Bebida_3:Bebidas[3],
+      Bebida_4:Bebidas[4],
+      Bebida_5:Bebidas[5],
       }
-    )
+      )
     .catch((error)=>{
-      alert("Unsuccesful operation,error:"+error);
+    alert("Unsuccesful operation,error:"+error);
     });
   }
 
