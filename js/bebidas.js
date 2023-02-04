@@ -105,6 +105,7 @@ function beb(id){
     Beb[id]= document.getElementById("Beb"+id).value;
     localStorage.setItem("Vol. Beb_"+ id + "_"+Ingredients[id]+":", Beb[id]);
     localStorage.setItem("Vol_I. Beb" + id + Ingredients[id] + ":", Beb[id]);
+
 }
 
 ////////////////////////////////////////////////////////////

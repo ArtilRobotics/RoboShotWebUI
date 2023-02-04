@@ -447,6 +447,110 @@ function sabor(a,c) {
                 localStorage.setItem("Vol. Beb_5_"+ nombre[4]+":", init5);
                 localStorage.setItem("Consumo_Beb_5" + nombre[4]+":", b5);
                 break;
+                       case nombre[5]:
+                beb6 = b[i];
+                if (localStorage.getItem("Vol. Beb_6_"+ nombre[5]+":") == localStorage.getItem("Vol_I. Beb6" + nombre[5] + ":")) {
+                    b6 = beb6;
+                } else {
+                    b6 = localStorage.getItem("Consumo_Beb_6" + nombre[5]+":");
+                    b6 = parseFloat(b6) + parseFloat(beb6);
+                }
+                init6 = localStorage.getItem("Vol. Beb_6_"+ nombre[5]+":");
+                init6 = init6 - beb6;
+                localStorage.setItem("Vol. Beb_6_"+ nombre[5]+":", init6);
+                localStorage.setItem("Consumo_Beb_6" + nombre[5]+":", b6);
+                break;
+            case nombre[6]:
+                beb7 = b[i];
+                if (localStorage.getItem("Vol. Beb_7_"+ nombre[6]+":") == localStorage.getItem("Vol_I. Beb7" + nombre[6] + ":")) {
+                    b7 = beb7;
+                } else {
+                    b7 = localStorage.getItem("Consumo_Beb_7" + nombre[6]+":");
+                    b7 = parseFloat(b7) + parseFloat(beb7);
+                }
+                init7 = localStorage.getItem("Vol. Beb_7_"+ nombre[6]+":");
+                init7 = init7 - beb7;
+                localStorage.setItem("Vol. Beb_7_"+ nombre[6]+":", init7);
+                localStorage.setItem("Consumo_Beb_7" + nombre[6]+":", b7);
+                break;
+            case nombre[7]:
+                beb8 = b[i];
+                if (localStorage.getItem("Vol. Beb_8_"+ nombre[7]+":") == localStorage.getItem("Vol_I. Beb8" + nombre[7] + ":")) {
+                    b8 = beb8;
+                } else {
+                    b8 = localStorage.getItem("Consumo_Beb_8" + nombre[7]+":");
+                    b8 = parseFloat(b8) + parseFloat(beb8);
+                }
+                init8 = localStorage.getItem("Vol. Beb_8_"+ nombre[7]+":");
+                init8 = init8 - beb8;
+                localStorage.setItem("Vol. Beb_8_"+ nombre[7]+":", init8);
+                localStorage.setItem("Consumo_Beb_8" + nombre[7]+":", b8);
+                break;
+            case nombre[7]:
+                beb8 = b[i];
+                if (localStorage.getItem("Vol. Beb_8_"+ nombre[7]+":") == localStorage.getItem("Vol_I. Beb8" + nombre[7] + ":")) {
+                    b8 = beb8;
+                } else {
+                    b8 = localStorage.getItem("Consumo_Beb_8" + nombre[7]+":");
+                    b8 = parseFloat(b8) + parseFloat(beb8);
+                }
+                init8 = localStorage.getItem("Vol. Beb_8_"+ nombre[7]+":");
+                init8 = init8 - beb8;
+                localStorage.setItem("Vol. Beb_8_"+ nombre[7]+":", init8);
+                localStorage.setItem("Consumo_Beb_8" + nombre[7]+":", b8);
+                break;
+            case nombre[8]:
+                beb9 = b[i];
+                if (localStorage.getItem("Vol. Beb_9_"+ nombre[8]+":") == localStorage.getItem("Vol_I. Beb9" + nombre[8] + ":")) {
+                    b9 = beb9;
+                } else {
+                    b9 = localStorage.getItem("Consumo_Beb_9" + nombre[8]+":");
+                    b9 = parseFloat(b9) + parseFloat(beb9);
+                }
+                init9 = localStorage.getItem("Vol. Beb_9_"+ nombre[8]+":");
+                init9 = init9 - beb9;
+                localStorage.setItem("Vol. Beb_9_"+ nombre[8]+":", init9);
+                localStorage.setItem("Consumo_Beb_9" + nombre[8]+":", b9);
+                break;
+            case nombre[9]:
+                beb10 = b[i];
+                if (localStorage.getItem("Vol. Beb_10_"+ nombre[9]+":") == localStorage.getItem("Vol_I. Beb10" + nombre[9] + ":")) {
+                    b10 = beb10;
+                } else {
+                    b10 = localStorage.getItem("Consumo_Beb_10" + nombre[9]+":");
+                    b10 = parseFloat(b10) + parseFloat(beb10);
+                }
+                init10 = localStorage.getItem("Vol. Beb_10_"+ nombre[9]+":");
+                init10 = init10 - beb10;
+                localStorage.setItem("Vol. Beb_10_"+ nombre[9]+":", init10);
+                localStorage.setItem("Consumo_Beb_10" + nombre[9]+":", b10);
+                break;
+            case nombre[10]:
+                beb11 = b[i];
+                if (localStorage.getItem("Vol. Beb_11_"+ nombre[10]+":") == localStorage.getItem("Vol_I. Beb11" + nombre[10] + ":")) {
+                    b11 = beb11;
+                } else {
+                    b11 = localStorage.getItem("Consumo_Beb_11" + nombre[10]+":");
+                    b11 = parseFloat(b11) + parseFloat(beb11);
+                }
+                init11 = localStorage.getItem("Vol. Beb_11_"+ nombre[10]+":");
+                init11 = init11 - beb11;
+                localStorage.setItem("Vol. Beb_11_"+ nombre[10]+":", init11);
+                localStorage.setItem("Consumo_Beb_11" + nombre[10]+":", b11);
+                break;  
+            case nombre[11]:
+                beb12 = b[i];
+                if (localStorage.getItem("Vol. Beb_12_"+ nombre[11]+":") == localStorage.getItem("Vol_I. Beb12" + nombre[11] + ":")) {
+                    b12 = beb12;
+                } else {
+                    b12 = localStorage.getItem("Consumo_Beb_12" + nombre[11]+":");
+                    b12 = parseFloat(b12) + parseFloat(beb12);
+                }
+                init12 = localStorage.getItem("Vol. Beb_12_"+ nombre[11]+":");
+                init12 = init12 - beb12;
+                localStorage.setItem("Vol. Beb_12_"+ nombre[11]+":", init12);
+                localStorage.setItem("Consumo_Beb_12" + nombre[11]+":", b12);
+                break;  
             default:
                 break;
         }
@@ -710,7 +814,7 @@ function messageArrived(msg) {
         DoseStartSubscriber(msg.payloadString);
     } else if (topic === TopicDose + "/progress") {
         DrinkProcessSubscriber(msg.payloadString);
-    } else if (topic === IngredientsList + "return/"){
+    } else if (topic === IngredientsList + "/return"){
         IngredientsListSubscriber(msg.payloadString);
     }
 }
@@ -726,8 +830,8 @@ function onConnect() {
 
 function publishatstart() {
     if (!started) {
-        publish(TopicDrinkList, "true");
         publish(IngredientsList, "true");
+        publish(TopicDrinkList, "true");
         setTimeout(function e() { publishatstart(); }, 5000);
     }
 }
