@@ -69,6 +69,7 @@ function closeConfigModal(id) {
     }
 }
 
+console.log("bebidas");
 //Bebidas general
 function openBebidaModal(id) {
     if (MM_status === MM_State.CLOSED) {

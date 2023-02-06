@@ -4,7 +4,7 @@
 
     <title>ROBOSHOT</title>
     <script src="js/mqtt.js"></script>
-    <script src="js/hector9000.js"></script>
+    <script src="js/hector9000.js" ></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="css/fontawesome/fontawesome.css" rel="stylesheet" type="text/css"/>
     <link href="css/hector9000.css" rel="stylesheet" type="text/css">
@@ -201,8 +201,8 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
     const analytics = getAnalytics(app);
+  
     
     //Fecha
     let hoy = new Date();
@@ -229,27 +229,39 @@
 
     async function InsertData23(){ 
         for (let i=1; i<=12; i++){
-            bebida[i]=localStorage.getItem("Consumo_Beb"+i+"_"+Ingredients[i]+":");
+            bebida[i]=localStorage.getItem("Consumo_Beb"+"_"+i+Ingredients[i]+":");
         }
-        
-      var ref= doc(db,"Consumo de las bebidas: "+formato1,"Consumo en ml:");
-      const docRef = await setDoc(
-      ref,{
-      Consumo_beb1:0,
-    //   Consumo_beb2:bebida[2],
-    //   Consumo_beb3:bebida[3],
-    //   Consumo_beb4:bebida[4],
-    //   Consumo_beb5:bebida[5],
-      }
-      )
-      .catch((error)=>{    
-      alert("Unsuccesful operation,error:"+error);
-      });
-    }
+        var beb1=toString(bebida[1]);
+        // var a= doc("Consumo_Beb"+Ingredients[1]+":");
 
+        // var firebaseRef = db.ref("chat").child('aaa').child('ccc');
+        // firebaseRef.set({
+        // text : 'bbb'
+        // });
+        var ref= doc(db,"Consumo de las bebidas: "+ formato1, "Consumo en ml:");
+        const docRef = await setDoc(
+        ref,{
+            Bebida_1:bebida[1],
+            Bebida_2:bebida[2],
+            Bebida_3:bebida[3],
+            Bebida_4:bebida[4],
+            Bebida_5:bebida[5],
+            Bebida_6:bebida[6],
+            Bebida_7:bebida[7],
+            Bebida_8:bebida[8],
+            Bebida_9:bebida[9],
+            Bebida_10:bebida[10],
+            Bebida_11:bebida[11],
+            Bebida_12:bebida[12],
+        }
+        )
+        .catch((error)=>{
+        alert("Unsuccesful operation,error:"+error);
+        });
+}
     window.InsertData23=InsertData23;
-  </script> -->
 
+  </script> 
 </body>
 
 </html>

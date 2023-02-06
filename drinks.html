@@ -669,7 +669,7 @@
                 <div class="CM_button2" onclick="closeConfigModal(12)">
                   <span>SALIR</span>
                </div>
-               <div class="CM_button2" id="Button12" onclick="beb12()">
+               <div class="CM_button2" id="Button12" onclick="beb(12)">
                 <span>ACEPTAR</span>
               </div>
             </div>
@@ -821,30 +821,58 @@
 
       let formato1=`${year}-${mes}-${dia}`;
       
+            
+      for (let i=1; i<=12; i++){
+          ingredients_drinks[i]= localStorage.getItem("Nombres"+i);
+      }
 
-    for (let i=1; i<=12; i++){
-        ingredients_drinks[i]= localStorage.getItem("Nombres"+i);
-        console.log(ingredients_drinks[id]);
-    }
-
-
-    // Bebidas[id]=(localStorage.getItem("Vol_I. Beb"+id + ingredients_drinks[id]+":"));
-    Bebidas[id]=(localStorage.getItem("Vol_I. Beb"+id +":"));
-    var ref= doc(db,"Volumen inicial de las bebidas: "+ formato1, "Volumen en ml:");
+      var bebida=0;
+      switch(id){
+        case 1:
+          bebida=localStorage.getItem("Vol_I. Beb1"+ingredients_drinks[1]+":");
+        break;
+        case 2:
+          bebida=localStorage.getItem("Vol_I. Beb2"+ingredients_drinks[2]+":");
+        break; 
+        case 3:
+          bebida=localStorage.getItem("Vol_I. Beb3"+ingredients_drinks[3]+":");
+        break;
+        case 4:
+          bebida=localStorage.getItem("Vol_I. Beb4"+ingredients_drinks[4]+":");
+        break;
+        case 5:
+          bebida=localStorage.getItem("Vol_I. Beb5"+ingredients_drinks[5]+":");
+        break;
+        case 6:
+          bebida=localStorage.getItem("Vol_I. Beb6"+ingredients_drinks[6]+":");
+        break;
+        case 7:
+          bebida=localStorage.getItem("Vol_I. Beb7"+ingredients_drinks[7]+":");
+        break;
+        case 8:
+          bebida=localStorage.getItem("Vol_I. Beb8"+ingredients_drinks[8]+":");
+        break;
+        case 9:
+          bebida=localStorage.getItem("Vol_I. Beb9"+ingredients_drinks[9]+":");
+        break;
+        case 10:
+          bebida=localStorage.getItem("Vol_I. Beb10"+ingredients_drinks[10]+":");
+        break;
+        case 11:
+          bebida=localStorage.getItem("Vol_I. Beb11"+ingredients_drinks[11]+":");
+        break;
+        case 12:
+          bebida=localStorage.getItem("Vol_I. Beb12"+ingredients_drinks[12]+":");
+        break;
+        default:
+        break;
+      }
+    
+    console.log(bebida);
+    var ref= doc(db,"Volumen inicial de las bebidas: "+ formato1, "Bebida_"+id+"_"+ingredients_drinks[id]);
     const docRef = await setDoc(
       ref,{
-      // Bebida_1:Bebidas[1],
-      // Bebida_2:Bebidas[2],
-      // Bebida_3:Bebidas[3],
-      // Bebida_4:Bebidas[4],
-      // Bebida_5:Bebidas[5],
-      // Bebida_6:Bebidas[6],
-      // Bebida_7:Bebidas[7],
-      // Bebida_8:Bebidas[8],
-      // Bebida_9:Bebidas[9],
-      // Bebida_10:Bebidas[10],
-      // Bebida_11:Bebidas[11],
-      // Bebida_12:Bebidas[12],
+        Cantidad_en_ml:bebida,
       }
       )
     .catch((error)=>{

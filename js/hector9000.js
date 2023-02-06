@@ -1,3 +1,4 @@
+
 const DM_State = {
     'CLOSED': 0,
     'OPENING': 1,
@@ -52,7 +53,7 @@ const TopicCloseAllValves = "Hector9000/closeAllValves";
 
 //--------- Testing start ---------------
 
-const testing = true;
+const testing = false;
 
 var drinkjson = '{ "id": "123", "name": "Getränk","color": "#999999",' +
     '"description": "Ein Getränk",' +
@@ -161,14 +162,14 @@ function startup() {
     }
 }
 
-function startup2() {
-    if (testing) {
-        started = true;
-        generateIngredients(drinkjson);
-    } else {
-        setUpMQTT();
-    }
-}
+// function startup2() {
+//     if (testing) {
+//         started = true;
+//         generateIngredients(drinkjson);
+//     } else {
+//         setUpMQTT();
+//     }
+// }
 // Mainmodal
 function openModal() {
     if (MM_status === MM_State.CLOSED) {
@@ -282,6 +283,7 @@ function showIngredientsAndButton(json) {
         aux3[i]=parseInt(localStorage.getItem("Vol_I. Beb"+ (i+1) + Ingredientes[i]+":"));
     }
     
+    localStorage.setItem("Sabores obtenidos",Ingredientes);
     console.log(Ingredientes);
     //Encuentro los nombres y la cantidad de los ingredientes de la receta
     for( let a=0 ; a < bebidas_long; a++){
@@ -289,6 +291,7 @@ function showIngredientsAndButton(json) {
         aux2[a]=drinkinfo.ingredients[a].ammount;
     }
 
+    localStorage.setItem("Sabores obtenidos_receta",aux1);
     console.log(aux1);
 
     //Defino mi while para la alarma, si encuentra uno que este mal sale.
@@ -298,6 +301,8 @@ function showIngredientsAndButton(json) {
             beb_equal[b]=Ingredientes.find(element => element == aux1[b]);
             b++;
         }
+        
+        localStorage.setItem("Sabores repetidos",beb_equal);
         console.log(beb_equal);
         //Busco las posiciones de esos ingredientes en la receta
         for (let i=0; i < b; i++){
@@ -305,6 +310,7 @@ function showIngredientsAndButton(json) {
         }
         //Hago un filtrado de solo tener posiciones mayores o iguales a 0, porque a veces tengo indefinidos en beb_pos
         const filtradoDeNumeros2 = beb_pos.filter((element)=> element >= 0 );
+        localStorage.setItem("Posiciones repetidos",beb_pos);
         console.log(filtradoDeNumeros2);
         //Obtengo la cantidad de los ingredientes que deseo de la receta
         let aux6;
@@ -313,12 +319,14 @@ function showIngredientsAndButton(json) {
             aux6=filtradoDeNumeros2[i];
             aux7[i]=aux2[aux6];
         }
+        localStorage.setItem("ml repetidos",aux7);
         console.log(aux7);
         //Busco en la lista de los ingredientes en general el ingrediente que se repite, para obtener la posicion y la cantidad que hay en ese momento
         while(c < long){
             beb2_equal[c]=Ingredientes.find(element => element == beb_equal[c])
             c++;
         }
+        localStorage.setItem("Sabores repetidos2",beb2_equal);
         console.log(beb2_equal);
         //Busco la posicion de esos ingredientes en la lista de ingredientes general
         for (let i=0; i < c; i++){
@@ -326,6 +334,7 @@ function showIngredientsAndButton(json) {
         }
         //Hago un filtrado
         const filtradoDeNumeros3 = beb2_pos.filter((element)=> element >= 0 );
+        localStorage.setItem("posiciones repetidos2",filtradoDeNumeros3);
         console.log(filtradoDeNumeros3);
         //Obtengo la cantidad de los ingredientes que deseo de la receta
         let aux8;
@@ -334,6 +343,7 @@ function showIngredientsAndButton(json) {
             aux8=filtradoDeNumeros3[i];
             aux9[i]=aux3[aux8];
         }
+        localStorage.setItem("ml repetidos2",aux9);
         console.log(aux9);
         
         for( let i=0; i< aux7.length; i++){
@@ -351,7 +361,6 @@ function showIngredientsAndButton(json) {
     }
     if (DM_status === DM_State.LOADING) {
         if(iguales == 0){
-            console.log("esta normal");
             console.log("doing stuff");
             document.getElementById("DM_ing_loader").className = "inv";
             document.getElementById("DM_zubereiten").disabled = false;
@@ -360,6 +369,7 @@ function showIngredientsAndButton(json) {
             });
             for (let i = 0; i < drinkinfo.ingredients.length; i++) {
                 document.getElementById("DM_List").innerHTML += '<div class="DM_ing"><div class="DM_ing_amm">' + drinkinfo.ingredients[i].ammount + 'ml</div><div class="DM_ing_name">' + drinkinfo.ingredients[i].name + '</div></div>';
+                console.log(drinkinfo.ingredients[i].name);
             }
         }else if(iguales == 1){
             console.log("es menor");
@@ -704,7 +714,7 @@ function home(){
 
 //Funcion para ingresar a la pagina principal y setear las variables en cero
 function home1(){
-    // location.href = "/home/pi/Hector9000WebUI/Main.html";
+    location.href = "/home/pi/Hector9000WebUI/Main.html";
     for(let i = 1; i <= long; i++){
         Ingredientes[i]= localStorage.getItem("Nombres"+i);
         localStorage.setItem("Consumo_Beb"+"_"+(i)+Ingredientes[i]+":",0);
