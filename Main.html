@@ -110,7 +110,7 @@
                     <span 
                         style="padding-right: 10px;"><span id="h11">Volver</a></span>
                 </div>
-                <div class="DM_button" id="DM_zubereiten" onclick="InsertData23()">
+                <div class="DM_button" id="DM_zubereiten" onclick=" ">
                     <div id="DM_zubereiten_inner">
                         <i class="fas fa-cocktail" style="margin-top: auto; margin-bottom: auto;"></i>
                         <span
@@ -140,7 +140,7 @@
                     <div class="CM_button" onclick="location.reload()">
                         <span id="h9">RECARGAR</span>
                     </div>
-                    <div class="CM_button" onclick=" ">
+                    <div class="CM_button" onclick="bebidas()">
                         <span id="h9">INF. BEBIDAS</span>
                     </div>
                 </div>
@@ -153,9 +153,6 @@
                     </div>
                 </div>
                 <div id="CM_buttons3">
-                    <div class="CM_button" onclick="bebidas()">
-                        <span id="h9">INF. CANTIDAD</span>
-                    </div>
                     <div class="CM_button" onclick="limpiar()">
                         <span id="h9">LIMPIAR</span>
                     </div>
@@ -227,17 +224,16 @@
         }
     }
 
+    var a=localStorage.getItem("Firebase");
+
+    if (a="1"){
+        InsertData23();
+    }
+
     async function InsertData23(){ 
         for (let i=1; i<=12; i++){
             bebida[i]=localStorage.getItem("Consumo_Beb"+"_"+i+Ingredients[i]+":");
         }
-        var beb1=toString(bebida[1]);
-        // var a= doc("Consumo_Beb"+Ingredients[1]+":");
-
-        // var firebaseRef = db.ref("chat").child('aaa').child('ccc');
-        // firebaseRef.set({
-        // text : 'bbb'
-        // });
         var ref= doc(db,"Consumo de las bebidas: "+ formato1, "Consumo en ml:");
         const docRef = await setDoc(
         ref,{

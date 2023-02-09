@@ -94,6 +94,8 @@ function generateButton(name, id, image) {
 
 function generateButtons(drinksjson) {
     started = true;
+    localStorage.setItem("Firebase",1);
+    localStorage.setItem("ID",0);
     var json = JSON.parse(drinksjson);
     jl = json.drinks.length;
     cont = document.getElementById("content");
@@ -170,9 +172,11 @@ function startup() {
 //         setUpMQTT();
 //     }
 // }
+
 // Mainmodal
 function openModal() {
     if (MM_status === MM_State.CLOSED) {
+        localStorage.setItem("Firebase",0);
         let main_modal = document.getElementById("mainModal");
         main_modal.className = "modal open";
         MM_status = MM_State.OPENING;
@@ -252,6 +256,7 @@ function openDrinkModal(drinkinfo) {
         } else {
             DM_status = DM_State.LOADING;
             publish(TopicIngredients, drinkinfo.getAttribute("d_id"));
+            localStorage.setItem("ID",drinkinfo.getAttribute("d_id"));
         }
     }
 }
@@ -282,18 +287,11 @@ function showIngredientsAndButton(json) {
         Ingredientes[i]=localStorage.getItem("Nombres"+ (i+1));
         aux3[i]=parseInt(localStorage.getItem("Vol_I. Beb"+ (i+1) + Ingredientes[i]+":"));
     }
-    
-    localStorage.setItem("Sabores obtenidos",Ingredientes);
-    console.log(Ingredientes);
     //Encuentro los nombres y la cantidad de los ingredientes de la receta
     for( let a=0 ; a < bebidas_long; a++){
         aux1[a]=drinkinfo_ingredients[a].name;
         aux2[a]=drinkinfo.ingredients[a].ammount;
     }
-
-    localStorage.setItem("Sabores obtenidos_receta",aux1);
-    console.log(aux1);
-
     //Defino mi while para la alarma, si encuentra uno que este mal sale.
     while(alarm){
         //Busco en la lista de la receta el primero que sea igual a uno que se encuentre en la lista de los ingredientes en general
@@ -301,17 +299,12 @@ function showIngredientsAndButton(json) {
             beb_equal[b]=Ingredientes.find(element => element == aux1[b]);
             b++;
         }
-        
-        localStorage.setItem("Sabores repetidos",beb_equal);
-        console.log(beb_equal);
         //Busco las posiciones de esos ingredientes en la receta
         for (let i=0; i < b; i++){
             beb_pos[i]=aux1.findIndex(element => element == beb_equal[i])
         }
         //Hago un filtrado de solo tener posiciones mayores o iguales a 0, porque a veces tengo indefinidos en beb_pos
         const filtradoDeNumeros2 = beb_pos.filter((element)=> element >= 0 );
-        localStorage.setItem("Posiciones repetidos",beb_pos);
-        console.log(filtradoDeNumeros2);
         //Obtengo la cantidad de los ingredientes que deseo de la receta
         let aux6;
         let aux7 = new Array();
@@ -319,33 +312,25 @@ function showIngredientsAndButton(json) {
             aux6=filtradoDeNumeros2[i];
             aux7[i]=aux2[aux6];
         }
-        localStorage.setItem("ml repetidos",aux7);
         console.log(aux7);
         //Busco en la lista de los ingredientes en general el ingrediente que se repite, para obtener la posicion y la cantidad que hay en ese momento
         while(c < long){
             beb2_equal[c]=Ingredientes.find(element => element == beb_equal[c])
             c++;
         }
-        localStorage.setItem("Sabores repetidos2",beb2_equal);
-        console.log(beb2_equal);
         //Busco la posicion de esos ingredientes en la lista de ingredientes general
         for (let i=0; i < c; i++){
             beb2_pos[i]=Ingredientes.findIndex(element => element == beb2_equal[i])
         }
         //Hago un filtrado
         const filtradoDeNumeros3 = beb2_pos.filter((element)=> element >= 0 );
-        localStorage.setItem("posiciones repetidos2",filtradoDeNumeros3);
-        console.log(filtradoDeNumeros3);
         //Obtengo la cantidad de los ingredientes que deseo de la receta
         let aux8;
         let aux9 = new Array();
         for (let i=0; i < filtradoDeNumeros3.length; i++){
             aux8=filtradoDeNumeros3[i];
             aux9[i]=aux3[aux8];
-        }
-        localStorage.setItem("ml repetidos2",aux9);
-        console.log(aux9);
-        
+        }     
         for( let i=0; i< aux7.length; i++){
             if(aux7[i]>aux9[i]){
                 iguales = 1;
@@ -354,7 +339,6 @@ function showIngredientsAndButton(json) {
         }
         break;
     }
-    console.log(b);
     if (drinkinfo.id != document.getElementById("mod-drink").getAttribute("d_id")) {
         console.log("not doing stuff");
         return;
@@ -369,11 +353,12 @@ function showIngredientsAndButton(json) {
             });
             for (let i = 0; i < drinkinfo.ingredients.length; i++) {
                 document.getElementById("DM_List").innerHTML += '<div class="DM_ing"><div class="DM_ing_amm">' + drinkinfo.ingredients[i].ammount + 'ml</div><div class="DM_ing_name">' + drinkinfo.ingredients[i].name + '</div></div>';
-                console.log(drinkinfo.ingredients[i].name);
             }
         }else if(iguales == 1){
-            console.log("es menor");
-            document.getElementById("DM_List").innerHTML += '<div class="DM_ing_amm">'+'No se puede preparar la bebida</div>';
+            document.getElementById("DM_image").innerHTML = '<div class="image"><img src="Imagen/prohibido coctel.jpg" alt="Alarma" width="85" height="100"></div>';
+            document.getElementById("DM_List").innerHTML += '<div class>'+'No se puede preparar la bebida</div>';
+            document.getElementById("DM_zubereiten").innerHTML += '<div class="DM_zubereiten_inner"> </div>';
+            document.getElementById("DM_zubereiten").style.display = "none";
         }
         DM_status = DM_State.RUNNING;
     }
@@ -601,7 +586,7 @@ function closeModalBack() {
 }
 
 function doseDrink(info) {
-    let id=info.id;
+    let id=localStorage.getItem("ID");
     let nombres=info.ingredients;
     let longitud=info.ingredients.length;
     console.log(nombres);
