@@ -69,13 +69,17 @@ function closeConfigModal(id) {
     }
 }
 
-console.log("bebidas");
 //Bebidas general
 function openBebidaModal(id) {
+    var ingredients_drinks = new Array();
+    for (let i=1; i<=12; i++){
+        ingredients_drinks[i]= localStorage.getItem("Nombres"+i);
+    }
     if (MM_status === MM_State.CLOSED) {
         openModal();
         setTimeout(function () {
             document.getElementById("mod-bebida"+id).className = "";
+            document.getElementById("CM_config"+id).innerHTML = '<div>  <span id="h9">'+ingredients_drinks[id]+'</a></span> </div>';
         }, 700);
     }
 }

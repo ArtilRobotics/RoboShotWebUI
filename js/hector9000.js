@@ -667,7 +667,6 @@ function doseEnded() {
             document.getElementById("DM_zubereiten").className = "DM_button";
             document.getElementById("DM_abbruch").className = "DM_button";
             document.getElementById("DM_dose_bar").className = "dis inv";
-            location.reload();
         }, 600);
     }
 }
